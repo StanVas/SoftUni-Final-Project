@@ -2,6 +2,7 @@ from django.core.validators import MinLengthValidator
 from django.db import models
 
 
+# TODO: Change all null and black
 class Article(models.Model):
     TITLE_MAX_LENGTH = 50
     TITLE_MIN_LENGTH = 3
@@ -34,4 +35,9 @@ class Article(models.Model):
     extra_image = models.URLField(
         null=True,
         blank=True,
+    )
+
+    main_text = models.TextField(
+        null=False,
+        blank=False,
     )

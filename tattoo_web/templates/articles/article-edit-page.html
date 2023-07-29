@@ -1,0 +1,13 @@
+{% extends 'base/base.html' %}
+{% block page_content %}
+
+    <form action="">
+        {{ form.as_p }}
+
+        {% csrf_token %}
+
+        <button type="submit">Save Changes</button>
+        <a href="{% url 'details article' pk=object.pk %}">Go Back</a>
+    </form>
+
+{% endblock %}

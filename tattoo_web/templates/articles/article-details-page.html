@@ -1,0 +1,23 @@
+{% extends 'base/base.html' %}
+{% block page_content %}
+    <ul>
+        <li>
+            <a href="{% url 'edit article' pk=object.pk %}"></a>
+        </li>
+        <li>{% url 'delete article' pk=object.pk %}</li>
+    </ul>
+
+    <h1>{{ article.title }}</h1>
+
+    {% if article.sub_title %}
+        <h2>{{ article.sub_title }}</h2>
+    {% endif %}
+
+    <img src="{{ article.main_image }}" alt="Main Image">
+
+    {% if article.extra_image %}
+        <img src="{{ article.extra_image }}" alt="Extra Image">
+    {% endif %}
+
+    <p>{{ article.main_text }}</p>
+{% endblock %}

@@ -1,9 +1,11 @@
 from django.urls import include, path
 
-from tattoo_web.articles.views import ArticleAddView, ArticleDetailsView, ArticleEditView, ArticleDeleteView
+from tattoo_web.articles.views import ArticleDetailsView, ArticleEditView, ArticleDeleteView, ArticleCreateView, \
+    ArticlesListView
 
 urlpatterns = (
-    path('add/', ArticleAddView.as_view(), name='add article'),
+    path('', ArticlesListView.as_view(), name='articles list'),
+    path('create/', ArticleCreateView.as_view(), name='create article'),
     path('<int:pk>/', include([
         path('', ArticleDetailsView.as_view(), name='details article'),
         path('edit/', ArticleEditView.as_view(), name='edit article'),
