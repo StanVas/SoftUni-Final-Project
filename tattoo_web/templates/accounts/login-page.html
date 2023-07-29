@@ -1,0 +1,25 @@
+{% extends 'base/base.html' %}
+{% load custom_filters %}
+{% block page_content %}
+    <div>
+        <div>
+            <h1>Login</h1>
+
+            <form action="{% url 'login user' %}" method="POST">
+                {{ form.username|placeholder:'Enter your username:' }}
+                {{ form.password|placeholder:'Enter your password:' }}
+
+                <input type="hidden" value="{{ next }}" name="next">
+
+                {% csrf_token %}
+
+                <button type="submit">Log in</button>
+            </form>
+
+        </div>
+        <div>
+
+            <p>Don't have account? <a href="{% url 'register user' %}?next={{ next }}">Register</a></p>
+        </div>
+    </div>
+{% endblock %}

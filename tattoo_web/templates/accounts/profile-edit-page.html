@@ -1,0 +1,50 @@
+{% extends 'base/base.html' %}
+{% load custom_filters %}
+{% block page_content %}
+    <div>
+        <h2>Edit Profile</h2>
+        {% if user.is_authenticated and user == profile %}
+            <form action="{% url 'edit user' pk=object.pk %}" method="POST">
+            <div class="form-group">
+                <label for="{{ form.first_name.id_for_label }}">First Name:</label>
+                {{ form.first_name|placeholder:'Enter your first name' }}
+                {% for error in form.first_name.errors %}
+                    <p class="text-danger">{{ error }}</p>
+                {% endfor %}
+            </div>
+            <div class="form-group">
+                <label for="{{ form.last_name.id_for_label }}">Last Name:</label>
+                {{ form.last_name|placeholder:'Enter your last name' }}
+                {% for error in form.last_name.errors %}
+                    <p class="text-danger">{{ error }}</p>
+                {% endfor %}
+            </div>
+            <div class="form-group">
+                <label for="{{ form.email.id_for_label }}">Email:</label>
+                {{ form.email|placeholder:'Enter your email' }}
+                {% for error in form.email.errors %}
+                    <p class="text-danger">{{ error }}</p>
+                {% endfor %}
+            </div>
+            <div class="form-group">
+                <label for="{{ form.profile_picture.id_for_label }}">Profile Picture:</label>
+                {{ form.profile_picture|placeholder:'Enter your profile picture' }}
+                {% for error in form.profile_picture.errors %}
+                    <p class="text-danger">{{ error }}</p>
+                {% endfor %}
+            </div>
+            {#            <div>First Name:{{ form.first_name|placeholder:'Enter your first name' }}</div>#}
+            {#            <div>Last Name:{{ form.last_name|placeholder:'Enter your last name' }}</div>#}
+            {#            <div>Email address:{{ form.email|placeholder:'Enter your email address' }}</div>#}
+            {#            <div>Profile Picture:{{ form.profile_picture|placeholder:'Add a profile picture' }}</div>#}
+
+            {% csrf_token %}
+
+            <button type="submit">Save Changes</button>
+
+            <a href="{% url 'details user' pk=object.pk %}">Go Back</a>
+        {% else %}
+            <p>You can't edit someone else's profile</p>
+        {% endif %}
+        </form>
+{% endblock %}

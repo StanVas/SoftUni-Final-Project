@@ -1,0 +1,53 @@
+{% extends 'base/base.html' %}
+{% load custom_filters %}
+{% block page_content %}
+    <div>
+        <div>
+            <h1>Registration</h1>
+            {# TODO: fix error messages #}
+            <form action="{% url 'register user' %}" method="POST">
+                <div class="form-group">
+                    <label for="{{ form.username.id_for_label }}">Username:</label>
+                    {{ form.username|placeholder:'Enter your username' }}
+                    {% for error in form.username.errors %}
+                        <p class="text-danger">{{ error }}</p>
+                    {% endfor %}
+                </div>
+                <div class="form-group">
+                    <label for="{{ form.email.id_for_label }}">Email:</label>
+                    {{ form.email|placeholder:'Enter your email' }}
+                    {% for error in form.email.errors %}
+                        <p class="text-danger">{{ error }}</p>
+                    {% endfor %}
+                </div>
+                <div class="form-group">
+                    <label for="{{ form.password1.id_for_label }}">Password:</label>
+                    {{ form.password1|placeholder:'Enter your password' }}
+                    {% for error in form.password1.errors %}
+                        <p class="text-danger">{{ error }}</p>
+                    {% endfor %}
+                </div>
+                <div class="form-group">
+                    <label for="{{ form.password2.id_for_label }}">Repeat Password:</label>
+                    {{ form.password2|placeholder:'Repeat your password' }}
+                    {% for error in form.password2.errors %}
+                        <p class="text-danger">{{ error }}</p>
+                    {% endfor %}
+                </div>
+
+                {#                <p>Username: {{ form.username|placeholder:'Enter your username' }}</p>#}
+                {#                <p>Email address:{{ form.email|placeholder:'Enter your email address' }}</p>#}
+                {#                <p>Password:{{ form.password1|placeholder:'Enter your password' }}</p>#}
+                {#                <p>Repeat Password:{{ form.password2|placeholder:'Repeat your password' }}</p>#}
+                <input type="hidden" value="{{ next }}" name="next">
+
+                {% csrf_token %}
+                <button type="submit">Register</button>
+            </form>
+        </div>
+        <div>
+            {# TODO: add `next` here #}
+            <p>Have an account? <a href="{% url 'login user' %}">Log in</a></p>
+        </div>
+    </div>
+{% endblock %}
