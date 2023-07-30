@@ -1,10 +1,12 @@
 {% extends 'base/base.html' %}
 {% block page_content %}
-    <nav>
-        <ul>
-            <li><a href="{% url 'create article'%}">Create article</a></li>
-        </ul>
-    </nav>
+    <div>
+        {% if user.is_staff %}
+            <ul>
+                <li><a href="{% url 'create article' %}">Create article</a></li>
+            </ul>
+        {% endif %}
+    </div>
     {% if not articles %}
         <h3>No Articles</h3>
     {% else %}

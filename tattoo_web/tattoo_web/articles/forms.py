@@ -9,7 +9,5 @@ class BaseArticleForm(forms.ModelForm):
         fields = '__all__'
 
 
-class EditArticleForm(forms.ModelForm):
-    class Meta:
-        model = Article
-        fields = '__all__'
+class EditArticleForm(BaseArticleForm):
+    pass

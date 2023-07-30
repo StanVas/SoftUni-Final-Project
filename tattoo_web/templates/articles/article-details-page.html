@@ -1,11 +1,16 @@
 {% extends 'base/base.html' %}
 {% block page_content %}
-    <ul>
-        <li>
-            <a href="{% url 'edit article' pk=object.pk %}"></a>
-        </li>
-        <li>{% url 'delete article' pk=object.pk %}</li>
-    </ul>
+    {% if user.is_staff %}
+        <ul>
+            <li>
+                <a href="{% url 'edit article' pk=object.pk %}">Edit Article</a>
+            </li>
+
+            <li>
+                <a href="{% url 'delete article' pk=object.pk %}">Delete Article</a>
+            </li>
+        </ul>
+    {% endif %}
 
     <h1>{{ article.title }}</h1>
 

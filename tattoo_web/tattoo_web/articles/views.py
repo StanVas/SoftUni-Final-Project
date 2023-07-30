@@ -2,7 +2,7 @@ from django.urls import reverse_lazy
 from django.utils.decorators import method_decorator
 from django.views import generic as views
 
-from tattoo_web.articles.forms import BaseArticleForm
+from tattoo_web.articles.forms import BaseArticleForm, EditArticleForm
 from tattoo_web.articles.models import Article
 
 from django.contrib.auth.decorators import user_passes_test
@@ -30,14 +30,24 @@ class ArticleCreateView(LoginRequiredMixin, views.CreateView):
     template_name = 'articles/article-create-page.html'
     form_class = BaseArticleForm
 
+    condition = True
+
     success_url = reverse_lazy('home')
 
 
 @method_decorator(user_passes_test(is_admin), name='dispatch')
 class ArticleEditView(LoginRequiredMixin, views.UpdateView):
+    model = Article
     template_name = 'articles/article-edit-page.html'
+
+    form_class = EditArticleForm
+
+    success_url = reverse_lazy('articles list')
 
 
 @method_decorator(user_passes_test(is_admin), name='dispatch')
 class ArticleDeleteView(LoginRequiredMixin, views.DeleteView):
+    model = Article
     template_name = 'articles/article-delete-page.html'
+
+    success_url = reverse_lazy('articles list')
