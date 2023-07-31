@@ -30,8 +30,6 @@ class ArticleCreateView(LoginRequiredMixin, views.CreateView):
     template_name = 'articles/article-create-page.html'
     form_class = BaseArticleForm
 
-    condition = True
-
     success_url = reverse_lazy('home')
 
 

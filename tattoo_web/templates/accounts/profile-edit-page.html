@@ -28,7 +28,7 @@
             </div>
             <div class="form-group">
                 <label for="{{ form.profile_picture.id_for_label }}">Profile Picture:</label>
-                {{ form.profile_picture|placeholder:'Enter your profile picture' }}
+                {{ form.profile_picture|placeholder:'Add profile picture' }}
                 {% for error in form.profile_picture.errors %}
                     <p class="text-danger">{{ error }}</p>
                 {% endfor %}

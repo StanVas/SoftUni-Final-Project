@@ -1,0 +1,27 @@
+{% extends 'base/base.html' %}
+{% load static %}
+{% block page_content %}
+    {% if user.is_staff %}
+        <ul>
+            <li>
+                <a href="{% url 'edit photo' pk=object.pk %}">Edit Photo</a>
+            </li>
+
+            <li>
+                <a href="{% url 'delete photo' pk=object.pk %}">Delete Photo</a>
+            </li>
+        </ul>
+    {% endif %}
+
+    <div>
+        <p>
+            {{ photo.photo }}
+        </p>
+        <p>
+            {{ photo.date_of_publication }}
+        </p>
+        <p>
+            {{ photo.description }}
+        </p>
+    </div>
+{% endblock %}

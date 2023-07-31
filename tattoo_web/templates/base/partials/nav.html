@@ -5,22 +5,20 @@
         <div class="nav-links">
             <ul class="nav-group">
                 <li class="nav-item">
+                    <a href="{% url 'home' %}">
+                        <i>Home Page</i>
+                    </a>
+                </li>
+                <li class="nav-item">
                     <a href="{% url 'articles list' %}">
                         <i>Articles</i>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="">
+                    <a href="{% url 'gallery' %}">
                         <i>Gallery</i>
                     </a>
                 </li>
-
-                {# probably REMOVE! #}
-{#                <li class="nav-item">#}
-{#                    <a href="">#}
-{#                        <i>Add photo</i>#}
-{#                    </a>#}
-{#                </li>#}
 
                 {% if request.user.is_authenticated %}
                     <li class="nav-item">

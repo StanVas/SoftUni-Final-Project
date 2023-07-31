@@ -1,8 +1,6 @@
 from django.core.exceptions import ValidationError
 
-
-def megabytes_to_bytes(mb):
-    return mb * 1024 * 1024
+from tattoo_web.core.utils import megabytes_to_bytes
 
 
 def validate_file_size(file_object):
