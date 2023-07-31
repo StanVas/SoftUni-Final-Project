@@ -6,4 +6,5 @@ UserModel = get_user_model()
 
 @admin.register(UserModel)
 class UserModelAdmin(admin.ModelAdmin):
-    pass
+    list_display = ('pk', 'username', 'email',)
+    ordering = ('pk',)

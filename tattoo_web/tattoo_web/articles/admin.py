@@ -5,4 +5,5 @@ from tattoo_web.articles.models import Article
 
 @admin.register(Article)
 class ArticleAdmin(admin.ModelAdmin):
-    pass
+    list_display = ('pk', 'title', 'sub_title',)
+    ordering = ('pk',)
