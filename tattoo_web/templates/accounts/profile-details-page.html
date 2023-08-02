@@ -10,9 +10,17 @@
             <a href="{% url 'delete user' pk=object.pk %}">Delete Profile</a>
         {% endif %}
 
-        <p>Username: {{ profile.username }}</p>
-        <p>First Name: {{ profile.first_name }}</p>
-        <p>Last Name: {{ profile.last_name }}</p>
+        <p>{{ profile.username }}</p>
+        {# TODO: fix full_name  #}
+        {#        <p>First Name: {{ profile.first_name }}</p>#}
+        {#        <p>Last Name: {{ profile.last_name }}</p>#}
+        {% if profile.full_name %}
+            <p>{{ profile.full_name }}</p>
+        {% endif %}
+
+        {% for photo in profile.userphoto_set.all %}
+            <a href="{% url 'details user photo' pk=photo.pk %}">{{ photo }}</a>
+        {% endfor %}
     </div>
 
 {% endblock %}

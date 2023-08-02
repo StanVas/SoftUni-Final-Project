@@ -1,8 +1,8 @@
 {% extends 'base/base.html' %}
 {% block page_content %}
     <div>
+        <h2>Add photo</h2>
         {% if user.is_authenticated and user.pk == request.user.pk %}
-            <h2>Add photo</h2>
             <form action="{% url 'add user photo' pk=request.user.pk %}" method="POST">
 
                 {{ form.as_p }}
