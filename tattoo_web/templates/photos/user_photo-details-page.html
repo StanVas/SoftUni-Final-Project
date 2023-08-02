@@ -1,0 +1,32 @@
+{% extends 'base/base.html' %}
+{% load static %}
+{% block page_content %}
+    {% if request.user.is_staff or object.user.pk == request.user.pk %}
+        <ul>
+            <li>
+                <a href="{% url 'edit user photo' pk=object.pk %}">Edit Photo</a>
+            </li>
+            <li>
+                <a href="{% url 'delete user photo' pk=object.pk %}">Delete Photo</a>
+            </li>
+        </ul>
+    {% endif %}
+
+    <div>
+        <p>
+            {{ user_photo.photo }}
+        </p>
+
+        <p>
+            <h4><a href="{% url 'details user' pk=object.user.pk%}">{{ object.user.username }}</a></h4>
+        </p>
+
+        <p>
+            {{ user_photo.date_of_publication }}
+        </p>
+
+        <p>
+            {{ user_photo.description }}
+        </p>
+    </div>
+{% endblock %}

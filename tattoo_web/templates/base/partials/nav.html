@@ -19,6 +19,11 @@
                         <i>Gallery</i>
                     </a>
                 </li>
+                <li class="nav-item">
+                    <a href="{% url 'user gallery' %}">
+                        <i>User Gallery</i>
+                    </a>
+                </li>
 
                 {% if request.user.is_authenticated %}
                     <li class="nav-item">

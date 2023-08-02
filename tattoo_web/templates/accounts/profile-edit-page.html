@@ -3,7 +3,7 @@
 {% block page_content %}
     <div>
         <h2>Edit Profile</h2>
-        {% if user.is_authenticated and user == profile %}
+        {% if user.is_authenticated and user == profile or user.is_staff %}
             <form action="{% url 'edit user' pk=object.pk %}" method="POST">
             <div class="form-group">
                 <label for="{{ form.first_name.id_for_label }}">First Name:</label>

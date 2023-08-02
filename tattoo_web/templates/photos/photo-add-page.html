@@ -9,6 +9,8 @@
             {% csrf_token %}
 
             <button type="submit">Add Photo</button>
+
+            <a class="anchor_button" href="{% url 'gallery' %}">Go Back</a>
         </form>
     </div>
 {% endblock %}

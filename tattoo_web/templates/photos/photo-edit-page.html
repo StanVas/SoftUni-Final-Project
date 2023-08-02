@@ -1,7 +1,7 @@
 {% extends 'base/base.html' %}
 {% block page_content %}
     <div>
-        <h2>Edit photo</h2>
+        <h2>Edit Photo</h2>
         <form action="{% url 'edit photo' pk=object.pk %}" method="POST">
 
             {{ form.as_p }}
@@ -10,6 +10,7 @@
 
             <button type="submit">Edit Photo</button>
 
+            <a class="anchor_button" href="{% url 'details photo' pk=object.pk %}">Go Back</a>
         </form>
     </div>
 {% endblock %}
