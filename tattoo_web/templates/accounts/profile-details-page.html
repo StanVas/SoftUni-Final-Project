@@ -4,7 +4,8 @@
     <h1>Profile Details</h1>
 
     <div>
-        {% if user.is_authenticated and user == profile or user.is_staff %}
+        {% if user.is_authenticated and user.pk == profile.pk or user.is_staff %}
+            <a href="{% url 'add user photo' pk=object.pk %}">Add Photo</a>
             <a href="{% url 'edit user' pk=object.pk %}">Edit Profile</a>
             <a href="{% url 'delete user' pk=object.pk %}">Delete Profile</a>
         {% endif %}

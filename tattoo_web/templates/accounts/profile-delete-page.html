@@ -3,9 +3,9 @@
 {% block page_content %}
     <div>
         <h1>
-            Confirm Profile Deletion
+            Confirm Deleting Profile
         </h1>
-        {% if user.is_authenticated and user == profile or user.is_staff %}
+        {% if user.is_authenticated and user.pk == profile.pk or user.is_staff %}
             <p>
                 Are you sure you want to delete your profile?
             </p>

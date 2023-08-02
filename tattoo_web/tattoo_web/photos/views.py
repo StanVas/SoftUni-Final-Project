@@ -1,11 +1,11 @@
 from django.contrib.auth.decorators import user_passes_test
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.urls import reverse_lazy
+from django.urls import reverse_lazy, reverse
 from django.utils.decorators import method_decorator
 from django.views import generic as views
 
 from tattoo_web.articles.views import is_admin
-from tattoo_web.photos.forms import BasePhotoForm
+from tattoo_web.photos.forms import BasePhotoForm, BaseUserPhotoForm
 from tattoo_web.photos.models import ArtistPhoto, UserPhoto
 
 
@@ -60,9 +60,18 @@ class UserPhotoDetailsView(LoginRequiredMixin, views.DetailView):
 
 class UserPhotoAddView(LoginRequiredMixin, views.CreateView):
     template_name = 'photos/user_photo-add-page.html'
-    form_class = BasePhotoForm
+    form_class = BaseUserPhotoForm
 
-    success_url = reverse_lazy('')
+    def get_success_url(self):
+        return reverse('details user photo', kwargs={
+            'pk': self.object.pk
+        })
+
+    # Autofill the UserPhoto.user field
+    def get_form(self, *args, **kwargs):
+        form = super().get_form(*args, **kwargs)
+        form.instance.user = self.request.user
+        return form
 
 
 class UserPhotoEditView(LoginRequiredMixin, views.UpdateView):
@@ -70,12 +79,17 @@ class UserPhotoEditView(LoginRequiredMixin, views.UpdateView):
     template_name = 'photos/user_photo-edit-page.html'
     form_class = BasePhotoForm
 
-    success_url = reverse_lazy('user gallery')
+    def get_success_url(self):
+        return reverse('details user photo', kwargs={
+            'pk': self.object.pk
+        })
 
 
 class UserPhotoDeleteView(LoginRequiredMixin, views.DeleteView):
     model = UserPhoto
     template_name = 'photos/user_photo-delete-page.html'
 
-    success_url = reverse_lazy('user gallery')
-
+    def get_success_url(self):
+        return reverse('details user', kwargs={
+            'pk': self.request.user.pk
+        })
