@@ -1,10 +1,12 @@
 from django.urls import path
 
 from tattoo_web.common.views import HomeView, photo_like, article_like, article_comment, \
-    copy_link_to_clipboard, ArtCommentEditView, ArtCommentDeleteView, UserCommentEditView, UserCommentDeleteView
+    copy_link_to_clipboard, ArtCommentEditView, ArtCommentDeleteView, UserCommentEditView, UserCommentDeleteView, \
+    AboutMeView
 
 urlpatterns = (
     path('', HomeView.as_view(), name='home'),
+    path('about_me', AboutMeView.as_view(), name='about me'),
     path('art_comment/<int:pk>/edit/', ArtCommentEditView.as_view(), name='edit comment art'),
     path('art_comment/<int:pk>/delete/', ArtCommentDeleteView.as_view(), name='delete comment art'),
 

@@ -2,6 +2,12 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <link rel="stylesheet" href="{% static 'css/reset.css' %}">
+
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.10.2/css/all.css"/>
+
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+
     <title>tatoo_web</title>
 </head>
 
@@ -15,8 +21,10 @@
     {% endblock %}
 </main>
 
-<div class="footer">
+<footer>
     {% include 'base/partials/footer.html' %}
+</footer>
+
 </div>
 </body>
 </html>

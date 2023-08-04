@@ -1,54 +1,57 @@
 {% load static %}
-<nav class="navbar">
-    <div class="container">
 
-        <div class="nav-links">
-            <ul class="nav-group">
-                <li class="nav-item">
-                    <a href="{% url 'home' %}">
-                        <i>Home Page</i>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="{% url 'articles list' %}">
-                        <i>Articles</i>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="{% url 'gallery' %}">
-                        <i>Gallery</i>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="{% url 'user gallery' %}">
-                        <i>User Gallery</i>
-                    </a>
-                </li>
+<div class="nav-logo">
+    <img class="logo" src="" alt="">
+    <h2 class="logo-text"><a href="{% url 'home' %}">Logo Text</a></h2>
+</div>
+<nav>
+    <div class="navigation">
+        <ul class="nav-group">
+            <li class="nav-item">
+                <a href="{% url 'about me' %}">
+                    <i>About me</i>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="{% url 'articles list' %}">
+                    <i>Articles</i>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="{% url 'gallery' %}">
+                    <i>Gallery</i>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="{% url 'user gallery' %}">
+                    <i>User Gallery</i>
+                </a>
+            </li>
 
-                {% if request.user.is_authenticated %}
-                    <li class="nav-item">
-                        <a href="{% url 'details user' pk=request.user.pk %}">
-                            <i>Profile</i>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="{% url 'logout user' %}">
-                            <i>Logout</i>
-                        </a>
-                    </li>
-                {% else %}
-                    <li class="nav-item">
-                        <a href="{% url 'login user' %}">
-                            <i>Login</i>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="{% url 'register user' %}">
-                            <i>Register</i>
-                        </a>
-                    </li>
-                {% endif %}
-            </ul>
-        </div>
+            {% if request.user.is_authenticated %}
+                <li class="nav-user-item">
+                    <a href="{% url 'details user' pk=request.user.pk %}">
+                        <i>Profile</i>
+                    </a>
+                </li>
+                <li class="nav-user-item">
+                    <a href="{% url 'logout user' %}">
+                        <i>Logout</i>
+                    </a>
+                </li>
+            {% else %}
+                <li class="nav-user-item">
+                    <a href="{% url 'login user' %}">
+                        <i>Login</i>
+                    </a>
+                </li>
+                <li class="nav-user-item">
+                    <a href="{% url 'register user' %}">
+                        <i>Register</i>
+                    </a>
+                </li>
+            {% endif %}
+        </ul>
     </div>
 </nav>
+
