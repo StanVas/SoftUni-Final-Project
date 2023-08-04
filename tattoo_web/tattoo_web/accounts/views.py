@@ -1,6 +1,6 @@
 from django.contrib.auth import views as auth_views, get_user_model, login
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.urls import reverse_lazy
+from django.urls import reverse_lazy, reverse
 from django.views import generic as views
 
 from tattoo_web.accounts.forms import RegisterUserForm, EditUserForm
@@ -50,9 +50,12 @@ class ProfileEditView(LoginRequiredMixin, views.UpdateView):
 
     form_class = EditUserForm
 
-    success_url = reverse_lazy('home')
+    # success_url = reverse_lazy('home')
 
     context_object_name = 'profile'
+
+    def get_success_url(self):
+        return reverse('details user', kwargs={'pk': self.object.pk})
 
     # def get_context_data(self, **kwargs):
     #     context = super().get_context_data(**kwargs)

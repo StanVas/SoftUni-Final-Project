@@ -16,17 +16,42 @@
         <p>
             {{ user_photo.photo }}
         </p>
-
         <p>
-            <h4><a href="{% url 'details user' pk=object.user.pk%}">{{ object.user.username }}</a></h4>
+        <h4><a href="{% url 'details user' pk=object.user.pk %}">{{ object.user.username }}</a></h4>
         </p>
-
         <p>
             {{ user_photo.date_of_publication }}
         </p>
-
         <p>
             {{ user_photo.description }}
         </p>
+    </div>
+
+    <div>
+        <form action="{% url 'comment user photo' pk=user_photo.pk %}" method="POST">
+            {% csrf_token %}
+            {{ comment_form.as_p }}
+            <button type="submit">Post Comment</button>
+        </form>
+    </div>
+
+    <div>
+        <h3>Comments:</h3>
+        {% for comment in comments %}
+            <div>
+                <p>
+                    <a href="{% url 'details user' pk=comment.user.pk %}">
+                        {{ comment.user }}
+                    </a>
+                    Date:{{ comment.date_time_of_publication }}
+                </p>
+                <p>{{ comment.text }}</p>
+            </div>
+
+            {% if user.is_authenticated and user == comment.user or user.is_staff %}
+                <a href="{% url 'edit comment user' pk=comment.pk %}">Edit</a>
+                <a href="{% url 'delete comment user' pk=comment.pk %}">Delete</a>
+            {% endif %}
+        {% endfor %}
     </div>
 {% endblock %}

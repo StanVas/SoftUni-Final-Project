@@ -5,6 +5,8 @@ from django.utils.decorators import method_decorator
 from django.views import generic as views
 
 from tattoo_web.articles.views import is_admin
+from tattoo_web.common.forms import ArtistPhotoCommentForm, UserPhotoCommentForm
+from tattoo_web.common.models import ArtistPhotoComment, UserPhotoComment
 from tattoo_web.photos.forms import BasePhotoForm, BaseUserPhotoForm
 from tattoo_web.photos.models import ArtistPhoto, UserPhoto
 
@@ -19,6 +21,13 @@ class PhotoDetailsView(views.DetailView):
     model = ArtistPhoto
     template_name = 'photos/photo-details-page.html'
     context_object_name = 'photo'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        photo_id = self.kwargs['pk']
+        context['comment_form'] = ArtistPhotoCommentForm()
+        context['comments'] = ArtistPhotoComment.objects.filter(photo_id=photo_id)
+        return context
 
 
 @method_decorator(user_passes_test(is_admin), name='dispatch')
@@ -56,6 +65,13 @@ class UserPhotoDetailsView(LoginRequiredMixin, views.DetailView):
     model = UserPhoto
     template_name = 'photos/user_photo-details-page.html'
     context_object_name = 'user_photo'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        photo_id = self.kwargs['pk']
+        context['comment_form'] = UserPhotoCommentForm()
+        context['comments'] = UserPhotoComment.objects.filter(photo_id=photo_id)
+        return context
 
 
 class UserPhotoAddView(LoginRequiredMixin, views.CreateView):

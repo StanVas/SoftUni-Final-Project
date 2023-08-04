@@ -1,0 +1,16 @@
+{% extends 'base/base.html' %}
+{% load static %}
+{% block page_content %}
+    <div>
+        <form action="{% url 'delete comment user' pk=object.pk %}" method="POST">
+            <h2>Delete Comment</h2>
+
+            <p>{{ object.text  }}</p>
+
+            {% csrf_token %}
+
+            <button type="submit">Delete</button>
+            <a href="{% url 'details user photo' pk=object.photo.pk %}">Go Back</a>
+        </form>
+    </div>
+{% endblock %}
