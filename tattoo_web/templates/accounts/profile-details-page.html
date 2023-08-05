@@ -5,22 +5,44 @@
 
     <div>
         {% if user.is_authenticated and user.pk == profile.pk or user.is_staff %}
-            <a href="{% url 'add user photo' pk=object.pk %}">Add Photo</a>
-            <a href="{% url 'edit user' pk=object.pk %}">Edit Profile</a>
-            <a href="{% url 'delete user' pk=object.pk %}">Delete Profile</a>
+            <ul class="special-btn">
+                <li>
+                    <a href="{% url 'add user photo' pk=object.pk %}">Add Photo</a>
+                </li>
+                <li>
+                    <a href="{% url 'edit user' pk=object.pk %}">Edit Profile</a>
+                </li>
+                <li>
+                    <a href="{% url 'delete user' pk=object.pk %}">Delete Profile</a>
+                </li>
+            </ul>
         {% endif %}
 
-        <p>{{ profile.username }}</p>
-        {# TODO: fix full_name  #}
-        {#        <p>First Name: {{ profile.first_name }}</p>#}
-        {#        <p>Last Name: {{ profile.last_name }}</p>#}
+        <h2>{{ profile.username }}</h2>
+
         {% if profile.full_name %}
             <p>{{ profile.full_name }}</p>
         {% endif %}
 
-        {% for photo in profile.userphoto_set.all %}
-            <a href="{% url 'details user photo' pk=photo.pk %}">{{ photo }}</a>
-        {% endfor %}
+        {% if not profile.userphoto_set.all %}
+            No Photos
+        {% else %}
+            <h2>Recent Photos</h2>
+            <ul class="user-photos">
+            {% for photo in profile.userphoto_set.all %}
+                <li class="user-photo">
+                    <a href="{% url 'details user photo' pk=photo.pk %}">
+                        <img src="{{ photo.photo.url }}" alt="{{ photo.description }}">
+                    </a>
+                    <p>
+                        {{ photo.date_of_publication }}
+                    </p>
+                    <p>
+                        {{ photo.description }}
+                    </p>
+                </li>
+            {% endfor %}
+        {% endif %}
+        </ul>
     </div>
-
 {% endblock %}

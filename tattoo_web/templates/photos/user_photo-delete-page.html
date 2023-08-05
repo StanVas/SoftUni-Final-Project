@@ -2,7 +2,7 @@
 {% block page_content %}
     <div>
         {% if request.user.is_staff or object.user.pk == request.user.pk %}
-            <form action="{% url 'delete user photo' pk=object.pk %}" method="POST">
+            <form class="form" action="{% url 'delete user photo' pk=object.pk %}" method="POST">
                 <h2>Delete Photo</h2>
 
                 {% csrf_token %}

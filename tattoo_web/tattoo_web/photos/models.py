@@ -12,11 +12,11 @@ class ArtistPhoto(models.Model):
     # TODO: change this to ImageField / make it blank=False
     photo = models.ImageField(
         upload_to='images',
-        null=False,
-        blank=False,
         validators=(
             validate_file_size,
         ),
+        null=False,
+        blank=False,
     )
 
     description = models.CharField(
@@ -42,11 +42,11 @@ class UserPhoto(models.Model):
     # TODO: change this to ImageField / make it blank=False
     photo = models.ImageField(
         upload_to='images',
-        null=False,
-        blank=True,
         validators=(
             validate_file_size,
         ),
+        null=False,
+        blank=True,
     )
 
     description = models.CharField(

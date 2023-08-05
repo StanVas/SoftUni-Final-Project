@@ -8,9 +8,10 @@
     <ul class="articles">
         {% for article in latest_articles %}
             <li class="article">
-                <img src="{{ article.main_image.url }}" alt="{{ article.title }}">
-                <h3>{{ article.title }}</h3>
-                <!-- Display other information about the article as needed -->
+                <a href="{% url 'details article' pk=article.pk %}">
+                    <img src="{{ article.main_image.url }}" alt="{{ article.title }}">
+                    <h3>{{ article.title }}</h3>
+                </a>
             </li>
         {% endfor %}
     </ul>
@@ -19,10 +20,13 @@
     <ul class="art-photos">
         {% for image in latest_images %}
             <li class="art-photo">
-                <h3>{{ image.photo }}</h3>
-                <p>{{ image.date_of_publication }}</p>
-                <p>{{ image.description }}</p>
-                <!-- Display other information about the article as needed -->
+                <a href="{% url 'details photo' pk=image.pk %}">
+                    <img src="{{ image.photo.url }}" alt="{{ image.description }}">
+                    <p>
+                        {{ image.date_of_publication }}
+                    </p>
+                    <p>{{ image.description }}</p>
+                </a>
             </li>
         {% endfor %}
     </ul>

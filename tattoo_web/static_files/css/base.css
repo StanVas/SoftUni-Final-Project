@@ -108,7 +108,7 @@ main * {
     color: hsl(33.33deg 6.24% 17.19%);
 }
 
-.articles, .art-photos{
+.articles, .art-photos, .user-photos{
     display: flex;
     gap: 48px;
 }
@@ -128,7 +128,12 @@ main * {
     max-height: 320px;
 }
 
-.art-photos img{
+.art-photo img{
+    max-width: 600px;
+    max-height: 480px;
+}
+
+.user-photo img{
     max-width: 600px;
     max-height: 480px;
 }

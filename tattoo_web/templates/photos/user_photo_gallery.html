@@ -6,13 +6,14 @@
             <h3>No Photos</h3>
         {% else %}
             <h2>Recent Photos</h2>
-            <ul>
+            <ul class="user-photos">
                 {% for user_photo in user_photos %}
                     <li class="user-photo">
                         <a href="{% url 'details user photo' pk=user_photo.pk %}">
                             <img src="{{ user_photo.photo.url }}" alt="{{ user_photo.description }}">
                         </a>
                         <p>
+                            <a href="{% url 'details user' pk=user_photo.user.pk %}">{{ user_photo.user.username }}</a>
                             {{ user_photo.date_of_publication }}
                         </p>
                         <p>

@@ -3,7 +3,7 @@
     <div>
         <h2>Add photo</h2>
         {% if user.is_authenticated and user.pk == request.user.pk %}
-            <form action="{% url 'add user photo' pk=request.user.pk %}" method="POST">
+            <form class="form" action="{% url 'add user photo' pk=request.user.pk %}" method="POST" enctype="multipart/form-data">
 
                 {{ form.as_p }}
 
