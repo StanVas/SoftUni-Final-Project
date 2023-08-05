@@ -1,14 +1,26 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.shortcuts import render
 from django.urls import reverse
 from django.views import generic as views
 
+from tattoo_web.articles.models import Article
 from tattoo_web.common.forms import ArtistPhotoCommentForm, UserPhotoCommentForm
 from tattoo_web.common.models import ArtistPhotoComment, UserPhotoComment
-from tattoo_web.photos.models import UserPhoto
+from tattoo_web.photos.models import UserPhoto, ArtistPhoto
 
 
 class HomeView(views.TemplateView):
     template_name = 'common/home.html'
+
+    def get(self, request, *args, **kwargs):
+        # Retrieve the last four articles from the database
+        latest_articles = Article.objects.all().order_by('-id')[:4]
+        latest_images = ArtistPhoto.objects.all().order_by('-id')[:4]
+        # Pass the latest articles to the template context
+        context = {'latest_articles': latest_articles, 'latest_images': latest_images}
+
+        # Render the template with the context
+        return render(request, self.template_name, context)
 
 
 class AboutMeView(views.TemplateView):

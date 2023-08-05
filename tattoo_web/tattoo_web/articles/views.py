@@ -28,9 +28,10 @@ class ArticleDetailsView(views.DetailView):
 @method_decorator(user_passes_test(is_admin), name='dispatch')
 class ArticleCreateView(LoginRequiredMixin, views.CreateView):
     template_name = 'articles/article-create-page.html'
+
     form_class = BaseArticleForm
 
-    success_url = reverse_lazy('home')
+    success_url = reverse_lazy('articles list')
 
 
 @method_decorator(user_passes_test(is_admin), name='dispatch')

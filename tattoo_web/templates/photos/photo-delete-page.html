@@ -1,14 +1,14 @@
 {% extends 'base/base.html' %}
 {% block page_content %}
     <div>
-        <form action="{% url 'delete photo' pk=object.pk %}" method="POST">
+        <form class="form" action="{% url 'delete photo' pk=object.pk %}" method="POST">
             <h2>Delete Photo</h2>
 
             {% csrf_token %}
 
-            <button type="submit">Delete</button>
+            <button class="submit-btn" type="submit">Delete</button>
 
-            <a class="anchor_button" href="{% url 'details photo' pk=object.pk %}">Go Back</a>
+            <a class="back-btn" href="{% url 'details photo' pk=object.pk %}">Go Back</a>
         </form>
     </div>
 {% endblock %}

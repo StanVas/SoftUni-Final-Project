@@ -1,48 +1,50 @@
 {% extends 'base/base.html' %}
 {% load custom_filters %}
 {% block page_content %}
-    <h2>Edit Article</h2>
-    <form action="{% url 'edit article' pk=object.pk %}" method="POST">
-        <div class="form-group">
-            <label for="{{ form.title.id_for_label }}">Title:</label>
-            {{ form.title|placeholder:'Enter title' }}
-            {% for error in form.title.errors %}
-                <p class="text-danger">{{ error }}</p>
-            {% endfor %}
-        </div>
-        <div class="form-group">
-            <label for="{{ form.sub_title.id_for_label }}">Subtitle:</label>
-            {{ form.sub_title|placeholder:'Enter subtitle' }}
-            {% for error in form.sub_title.errors %}
-                <p class="text-danger">{{ error }}</p>
-            {% endfor %}
-        </div>
-        <div class="form-group">
-            <label for="{{ form.main_image.id_for_label }}">Main image:</label>
-            {{ form.main_image|placeholder:'Add main image' }}
-            {% for error in form.main_image.errors %}
-                <p class="text-danger">{{ error }}</p>
-            {% endfor %}
-        </div>
-        <div class="form-group">
-            <label for="{{ form.extra_image.id_for_label }}">Extra image:</label>
-            {{ form.extra_image|placeholder:'Add extra image' }}
-            {% for error in form.extra_image.errors %}
-                <p class="text-danger">{{ error }}</p>
-            {% endfor %}
-        </div>
-        <div class="form-group">
-            <label for="{{ form.main_text.id_for_label }}">Main text:</label>
-            {{ form.main_text|placeholder:'Add main text' }}
-            {% for error in form.main_text.errors %}
-                <p class="text-danger">{{ error }}</p>
-            {% endfor %}
-        </div>
+    <section>
+        <h2>Edit Article</h2>
+        <form class="form" action="{% url 'edit article' pk=object.pk %}" method="POST" enctype="multipart/form-data">
+            <div class="form-group">
+                <label for="{{ form.title.id_for_label }}">Title:</label>
+                {{ form.title|placeholder:'Enter title' }}
+                {% for error in form.title.errors %}
+                    <p class="text-danger">{{ error }}</p>
+                {% endfor %}
+            </div>
+            <div class="form-group">
+                <label for="{{ form.sub_title.id_for_label }}">Subtitle:</label>
+                {{ form.sub_title|placeholder:'Enter subtitle' }}
+                {% for error in form.sub_title.errors %}
+                    <p class="text-danger">{{ error }}</p>
+                {% endfor %}
+            </div>
+            <div class="form-group">
+                <label for="{{ form.main_image.id_for_label }}">Main image:</label>
+                {{ form.main_image|placeholder:'Add main image' }}
+                {% for error in form.main_image.errors %}
+                    <p class="text-danger">{{ error }}</p>
+                {% endfor %}
+            </div>
+            <div class="form-group">
+                <label for="{{ form.extra_image.id_for_label }}">Extra image:</label>
+                {{ form.extra_image|placeholder:'Add extra image' }}
+                {% for error in form.extra_image.errors %}
+                    <p class="text-danger">{{ error }}</p>
+                {% endfor %}
+            </div>
+            <div class="form-group">
+                <label for="{{ form.main_text.id_for_label }}">Main text:</label>
+                {{ form.main_text|placeholder:'Add main text' }}
+                {% for error in form.main_text.errors %}
+                    <p class="text-danger">{{ error }}</p>
+                {% endfor %}
+            </div>
 
-        {% csrf_token %}
+            {% csrf_token %}
 
-        <button type="submit">Save Changes</button>
+            <button class="submit-btn" type="submit">Save Changes</button>
 
-        <a href="{% url 'details article' pk=object.pk %}">Go Back</a>
-    </form>
+            <a class="back-btn" href="{% url 'details article' pk=object.pk %}">Go Back</a>
+        </form>
+    </section>
 {% endblock %}

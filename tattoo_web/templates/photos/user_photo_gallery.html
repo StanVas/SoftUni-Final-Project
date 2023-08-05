@@ -8,10 +8,17 @@
             <h2>Recent Photos</h2>
             <ul>
                 {% for user_photo in user_photos %}
-                    <li>
-                         <a href="{% url 'details user photo' pk=user_photo.pk %}">{{ user_photo.photo }}</a>
+                    <li class="user-photo">
+                        <a href="{% url 'details user photo' pk=user_photo.pk %}">
+                            <img src="{{ user_photo.photo.url }}" alt="{{ user_photo.description }}">
+                        </a>
+                        <p>
+                            {{ user_photo.date_of_publication }}
+                        </p>
+                        <p>
+                            {{ user_photo.description }}
+                        </p>
                     </li>
-
                 {% endfor %}
             </ul>
         {% endif %}

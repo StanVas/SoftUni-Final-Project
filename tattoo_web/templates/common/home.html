@@ -1,5 +1,29 @@
 {% extends 'base/base.html' %}
 {% load static %}
 {% block page_content %}
+    <img class="logo-img" width="700px" src="{% static 'img/image333.png' %}" alt="">
     <h1>Welcome to the Home Page</h1>
+
+    <h2>Last Four Articles:</h2>
+    <ul class="articles">
+        {% for article in latest_articles %}
+            <li class="article">
+                <img src="{{ article.main_image.url }}" alt="{{ article.title }}">
+                <h3>{{ article.title }}</h3>
+                <!-- Display other information about the article as needed -->
+            </li>
+        {% endfor %}
+    </ul>
+
+    <h2>Last Four Images:</h2>
+    <ul class="art-photos">
+        {% for image in latest_images %}
+            <li class="art-photo">
+                <h3>{{ image.photo }}</h3>
+                <p>{{ image.date_of_publication }}</p>
+                <p>{{ image.description }}</p>
+                <!-- Display other information about the article as needed -->
+            </li>
+        {% endfor %}
+    </ul>
 {% endblock %}

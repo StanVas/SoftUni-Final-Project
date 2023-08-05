@@ -1,6 +1,8 @@
 from django.core.validators import MinLengthValidator
 from django.db import models
 
+from tattoo_web.core.utils import validate_file_size
+
 
 # TODO: Change all null and black
 class Article(models.Model):
@@ -23,18 +25,26 @@ class Article(models.Model):
         validators=(
             MinLengthValidator(SUB_TITLE_MIN_LENGTH),
         ),
-        null=True,
-        blank=True,
+        null=False,
+        blank=False,
     )
 
-    main_image = models.URLField(
-        null=True,
-        blank=True,
+    main_image = models.ImageField(
+        upload_to='images',
+        validators=(
+            validate_file_size,
+        ),
+        null=False,
+        blank=False,
     )
 
-    extra_image = models.URLField(
-        null=True,
-        blank=True,
+    extra_image = models.ImageField(
+        upload_to='images',
+        validators=(
+            validate_file_size,
+        ),
+        null=False,
+        blank=False,
     )
 
     main_text = models.TextField(

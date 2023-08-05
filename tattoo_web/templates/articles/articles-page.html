@@ -2,21 +2,25 @@
 {% block page_content %}
     <div>
         {% if user.is_staff %}
-            <ul>
+            <ul class="special-btn">
                 <li><a href="{% url 'create article' %}">Create article</a></li>
             </ul>
         {% endif %}
+
+        {% if not articles %}
+            <h3>No Articles</h3>
+        {% else %}
+            <h2>Recent Articles</h2>
+            <ul class="articles">
+                {% for article in articles %}
+                    <li class="article">
+                        <a href="{% url 'details article' pk=article.pk %}">
+                            <img src="{{ article.main_image.url }}" alt="{{ article.title }}">
+                            <h3>{{ article.title }}</h3>
+                        </a>
+                    </li>
+                {% endfor %}
+            </ul>
+        {% endif %}
     </div>
-    {% if not articles %}
-        <h3>No Articles</h3>
-    {% else %}
-        <h2>Recent Articles</h2>
-        <ul>
-            {% for article in articles %}
-                <li>
-                    <a href="{% url 'details article' pk=article.pk %}">{{ article.title }}</a>
-                </li>
-            {% endfor %}
-        </ul>
-    {% endif %}
 {% endblock %}

@@ -1,16 +1,17 @@
 {% extends 'base/base.html' %}
 {% block page_content %}
     <div>
-        <h2>Add photo</h2>
-        <form action="{% url 'add photo' %}" method="POST">
+        <h2>Add Photo</h2>
+
+        <form class="form" action="{% url 'add photo' %}" method="POST" enctype="multipart/form-data">
 
             {{ form.as_p }}
 
             {% csrf_token %}
 
-            <button type="submit">Add Photo</button>
+            <button class="submit-btn" type="submit">Add Photo</button>
 
-            <a class="anchor_button" href="{% url 'gallery' %}">Go Back</a>
+            <a class="back-btn" href="{% url 'gallery' %}">Go Back</a>
         </form>
     </div>
 {% endblock %}

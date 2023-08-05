@@ -18,7 +18,7 @@ class Migration(migrations.Migration):
             name='Photo',
             fields=[
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('photo', models.URLField(blank=True, validators=[tattoo_web.photos.validators.validate_file_size])),
+                ('photo', models.URLField(blank=True)),
                 ('description', models.CharField(blank=True, max_length=300, null=True, validators=[django.core.validators.MinLengthValidator(10)])),
                 ('date_of_publication', models.DateField(auto_now=True)),
             ],
