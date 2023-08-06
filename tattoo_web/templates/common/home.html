@@ -7,10 +7,14 @@
     <h2>Last Four Articles:</h2>
     <ul class="articles">
         {% for article in latest_articles %}
-            <li class="article">
+            <li class="article-container">
                 <a href="{% url 'details article' pk=article.pk %}">
                     <img src="{{ article.main_image.url }}" alt="{{ article.title }}">
-                    <h3>{{ article.title }}</h3>
+                    <div class="content">
+                        <h3 class="title">{{ article.title }}</h3>
+                        <h4 class="subtitle">{{ article.sub_title }}</h4>
+                    </div>
+
                 </a>
             </li>
         {% endfor %}
@@ -22,10 +26,10 @@
             <li class="art-photo">
                 <a href="{% url 'details photo' pk=image.pk %}">
                     <img src="{{ image.photo.url }}" alt="{{ image.description }}">
-                    <p>
+                    <p class="date">
                         {{ image.date_of_publication }}
                     </p>
-                    <p>{{ image.description }}</p>
+                    <p class="description">{{ image.description }}</p>
                 </a>
             </li>
         {% endfor %}
