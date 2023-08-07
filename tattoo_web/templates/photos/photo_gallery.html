@@ -10,19 +10,18 @@
         {% if not photos %}
             <h3>No Photos</h3>
         {% else %}
-            <h2>Recent Photos</h2>
             <ul class="art-photos">
-                {% for photo in photos %}
+                {% for image in photos %}
                     <li class="art-photo">
-                        <a href="{% url 'details photo' pk=photo.pk %}">
-                            <img src="{{ photo.photo.url }}" alt="{{ photo.description }}">
+                        <a href="{% url 'details photo' pk=image.pk %}">
+                            <img src="{{ image.photo.url }}" alt="{{ image.description }}">
+                            <p class="date">
+                                {{ image.date_of_publication }}
+                            </p>
+                            <p class="description">
+                                {{ image.description }}
+                            </p>
                         </a>
-                        <p>
-                            {{ photo.date_of_publication }}
-                        </p>
-                        <p>
-                            {{ photo.description }}
-                        </p>
                     </li>
                 {% endfor %}
             </ul>

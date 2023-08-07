@@ -1,12 +1,13 @@
 /* Articles */
 .articles {
     display: flex;
+    flex-wrap: wrap;
     gap: 48px;
     align-items: center;
 }
 
 .article-container {
-    width: 400px;
+    width: 380px;
     height: 560px;
     aspect-ratio: 1/1.5;
     border-radius: 6px;

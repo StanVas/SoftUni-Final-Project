@@ -1,48 +1,56 @@
 {% extends 'base/base.html' %}
 {% load static %}
 {% block page_content %}
-    <h1>Profile Details</h1>
+    <section class="profile-container">
+        <div class="profile-details">
+            {% if user.is_authenticated and user.pk == profile.pk or user.is_staff %}
+                <ul class="special-btn">
+                    <li>
+                        <a href="{% url 'edit user' pk=object.pk %}">Edit Profile</a>
+                    </li>
+                    <li>
+                        <a href="{% url 'delete user' pk=object.pk %}">Delete Profile</a>
+                    </li>
+                </ul>
+            {% endif %}
 
-    <div>
-        {% if user.is_authenticated and user.pk == profile.pk or user.is_staff %}
-            <ul class="special-btn">
-                <li>
-                    <a href="{% url 'add user photo' pk=object.pk %}">Add Photo</a>
-                </li>
-                <li>
-                    <a href="{% url 'edit user' pk=object.pk %}">Edit Profile</a>
-                </li>
-                <li>
-                    <a href="{% url 'delete user' pk=object.pk %}">Delete Profile</a>
-                </li>
-            </ul>
-        {% endif %}
+            <h1>Profile Details</h1>
 
-        <h2>{{ profile.username }}</h2>
+            <p><span class="color">{{ profile.username }}</span></p>
 
-        {% if profile.full_name %}
-            <p>{{ profile.full_name }}</p>
-        {% endif %}
+            {% if profile.full_name %}
+                <p class="full-name">{{ profile.full_name }}</p>
+            {% endif %}
+        </div>
 
-        {% if not profile.userphoto_set.all %}
-            No Photos
-        {% else %}
-            <h2>Recent Photos</h2>
-            <ul class="user-photos">
-            {% for photo in profile.userphoto_set.all %}
-                <li class="user-photo">
-                    <a href="{% url 'details user photo' pk=photo.pk %}">
-                        <img src="{{ photo.photo.url }}" alt="{{ photo.description }}">
-                    </a>
-                    <p>
-                        {{ photo.date_of_publication }}
-                    </p>
-                    <p>
-                        {{ photo.description }}
-                    </p>
-                </li>
-            {% endfor %}
-        {% endif %}
-        </ul>
-    </div>
+        <div class="profile-gallery">
+            {% if user.is_authenticated and user.pk == profile.pk or user.is_staff %}
+                <ul class="special-btn">
+                    <li>
+                        <a href="{% url 'add user photo' pk=object.pk %}">Add Photo</a>
+                    </li>
+                </ul>
+            {% endif %}
+            {% if not profile.userphoto_set.all %}
+                <h1>No Photos</h1>
+            {% else %}
+                <p><span class="color">{{ user.username }}'s</span> Photos</p>
+                <ul class="user-photos">
+                    {% for photo in profile.userphoto_set.all %}
+                        <li class="user-photo">
+                            <a href="{% url 'details user photo' pk=photo.pk %}">
+                                <img src="{{ photo.photo.url }}" alt="{{ photo.description }}">
+                                <p class="date">
+                                    {{ photo.date_of_publication }}
+                                </p>
+                                <p class="description">
+                                    {{ photo.description }}
+                                </p>
+                            </a>
+                        </li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+        </div>
+    </section>
 {% endblock %}

@@ -5,20 +5,44 @@
         {% if not user_photos %}
             <h3>No Photos</h3>
         {% else %}
-            <h2>Recent Photos</h2>
+
+            {#            <ul class="user-photos">#}
+            {#                {% for user_photo in user_photos %}#}
+            {#                    <li class="user-photo">#}
+            {#                        <a href="{% url 'details user photo' pk=user_photo.pk %}">#}
+            {#                            <img src="{{ user_photo.photo.url }}" alt="{{ user_photo.description }}">#}
+            {#                        </a>#}
+            {#                        <p>#}
+            {#                            <a href="{% url 'details user' pk=user_photo.user.pk %}">{{ user_photo.user.username }}</a>#}
+            {#                            {{ user_photo.date_of_publication }}#}
+            {#                        </p>#}
+            {#                        <p>#}
+            {#                            {{ user_photo.description }}#}
+            {#                        </p>#}
+            {#                    </li>#}
+            {#                {% endfor %}#}
+            {#            </ul>#}
+
             <ul class="user-photos">
-                {% for user_photo in user_photos %}
+                {% for user_image in user_photos %}
                     <li class="user-photo">
-                        <a href="{% url 'details user photo' pk=user_photo.pk %}">
-                            <img src="{{ user_photo.photo.url }}" alt="{{ user_photo.description }}">
+                        <a href="{% url 'details user photo' pk=user_image.pk %}">
+                            <img class="user-img" src="{{ user_image.photo.url }}" alt="{{ user_image.user.username }}">
+                            <div class="meta-info">
+                                <div class="user-icon">
+                                    <img src="{{ user_image.user.profile_picture }}" alt="{{ user_image.user.username }}">
+                                </div>
+                            </div>
+                            <p class="username">
+                                {{ user_image.user.username }}
+                            </p>
+                            <p class="date">
+                                {{ user_image.date_of_publication }}
+                            </p>
+                            <p class="description">
+                                {{ user_image.description }}
+                            </p>
                         </a>
-                        <p>
-                            <a href="{% url 'details user' pk=user_photo.user.pk %}">{{ user_photo.user.username }}</a>
-                            {{ user_photo.date_of_publication }}
-                        </p>
-                        <p>
-                            {{ user_photo.description }}
-                        </p>
                     </li>
                 {% endfor %}
             </ul>

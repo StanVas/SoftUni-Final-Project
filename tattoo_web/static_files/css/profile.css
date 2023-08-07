@@ -1,0 +1,38 @@
+.profile-container {
+    display: flex;
+    gap: 15px;
+}
+
+.profile-container .color {
+    color: darkorange;
+}
+
+.profile-container h1, p {
+    justify-content: center;
+    text-align: center;
+    font-size: 32px;
+    font-weight: 600;
+}
+
+.profile-details {
+    background-color: #7a7a7a;
+    width: 25%;
+    border: 2px solid hsl(38.33deg 35.29% 80%);
+    border-radius: 65px;
+}
+
+.profile-details .full-name {
+    padding-top: 48px;
+}
+
+.profile-gallery {
+    padding-bottom: 32px;
+    background-color: #929191;
+    width: 75%;
+    border: 2px solid hsl(38.33deg 35.29% 80%);
+    border-radius: 65px;
+}
+
+.user-photos .description {
+    font-size: 18px;
+}

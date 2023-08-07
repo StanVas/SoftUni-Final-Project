@@ -1,12 +1,13 @@
-/* Articles */
+/* Artist Photo */
 .art-photos {
     display: flex;
     gap: 48px;
     align-items: center;
+    flex-wrap: wrap;
 }
 
 .art-photo {
-    width: 400px;
+    width: 380px;
     height: 560px;
     border-radius: 6px;
     overflow: hidden;
@@ -44,7 +45,8 @@
     margin-bottom: 24px;
     color: #e2dfdf;
     text-align: center;
-    font-weight: 800;
+    font-weight: 700;
+    font-size: 18px;
 }
 
 .art-photo .date {
