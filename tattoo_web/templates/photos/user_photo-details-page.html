@@ -1,57 +1,64 @@
 {% extends 'base/base.html' %}
 {% load static %}
 {% block page_content %}
-    {% if request.user.is_staff or object.user.pk == request.user.pk %}
-        <ul class="special-btn">
-            <li>
-                <a href="{% url 'edit user photo' pk=object.pk %}">Edit Photo</a>
-            </li>
-            <li>
-                <a href="{% url 'delete user photo' pk=object.pk %}">Delete Photo</a>
-            </li>
-        </ul>
-    {% endif %}
+    <div class="photo-details">
+        {% if request.user.is_staff or object.user.pk == request.user.pk %}
+            <ul class="special-btn">
+                <li>
+                    <a href="{% url 'edit user photo' pk=object.pk %}">Edit Photo</a>
+                </li>
+                <li>
+                    <a href="{% url 'delete user photo' pk=object.pk %}">Delete Photo</a>
+                </li>
+            </ul>
+        {% endif %}
 
-    <div>
-        <p>
-            <img src="{{ user_photo.photo.url }}" alt="{{ user_photo.description }}">
-        </p>
-        <p>
-            <a href="{% url 'details user' pk=object.user.pk %}">{{ object.user.username }}</a>
-            {{ user_photo.date_of_publication }}
-        </p>
-        <p>
-            {{ user_photo.description }}
-        </p>
-    </div>
+        <div class="photo-content">
+            <span class="photo-img">
+                <img src="{{ user_photo.photo.url }}" alt="{{ user_photo.description }}">
+            </span>
+            <p class="photo-meta">
+                <a href="{% url 'details user' pk=object.user.pk %}">
+                    <span class="color">
+                        {{ object.user.username }}
+                    </span>
+                </a>
+                <span>{{ user_photo.date_of_publication }}</span>
+            </p>
+            <p class="description">
+                {{ user_photo.description }}
+            </p>
+        </div>
 
-    <div>
-        <form class="comment-form" action="{% url 'comment user photo' pk=user_photo.pk %}" method="POST">
-            {% csrf_token %}
-            {{ comment_form.as_p }}
-            <button type="submit">Post Comment</button>
-        </form>
-    </div>
+        <div>
+            <form class="comment-form" action="{% url 'comment user photo' pk=user_photo.pk %}" method="POST">
+                {% csrf_token %}
+                {{ comment_form.as_p }}
+                <button class="comment-btn" type="submit">Post Comment</button>
+            </form>
+        </div>
 
-    <div>
-        <h3>Comments:</h3>
-        {% for comment in comments %}
-            <div class="comment">
-                <p>
-                    <a href="{% url 'details user' pk=comment.user.pk %}">
-                        {{ comment.user }}
-                    </a>
-                    Date:{{ comment.date_time_of_publication }}
-                </p>
-                <p>{{ comment.text }}</p>
-            </div>
-
-            {% if user.is_authenticated and user == comment.user or user.is_staff %}
-                <div class="special-btn">
-                    <a href="{% url 'edit comment user' pk=comment.pk %}">Edit</a>
-                    <a href="{% url 'delete comment user' pk=comment.pk %}">Delete</a>
+        <div class="comment-container">
+            {% for comment in comments %}
+                <div class="comment">
+                    <div>
+                        <a href="{% url 'details user' pk=comment.user.pk %}">
+                            <span class="color">{{ comment.user }}</span>
+                        </a>
+                        <span>
+                            Date:{{ comment.date_time_of_publication }}
+                        </span>
+                    </div>
+                    <p>{{ comment.text }}</p>
                 </div>
-            {% endif %}
-        {% endfor %}
+
+                {% if user.is_authenticated and user == comment.user or user.is_staff %}
+                    <div class="special-btn">
+                        <a href="{% url 'edit comment user' pk=comment.pk %}">Edit</a>
+                        <a href="{% url 'delete comment user' pk=comment.pk %}">Delete</a>
+                    </div>
+                {% endif %}
+            {% endfor %}
+        </div>
     </div>
 {% endblock %}

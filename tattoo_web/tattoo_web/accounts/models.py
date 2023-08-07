@@ -1,8 +1,10 @@
 from django.contrib.auth.models import AbstractUser
 from django.core.validators import MinLengthValidator
 from django.db import models
+from django.templatetags.static import static
 
 from tattoo_web.accounts.validators import validate_only_alphabetical
+from tattoo_web.core.utils import validate_file_size
 
 
 class UserProfile(AbstractUser):
@@ -49,9 +51,14 @@ class UserProfile(AbstractUser):
         blank=True,
     )
 
-    profile_picture = models.URLField(
-        null=True,
-        blank=True,
+    profile_picture = models.ImageField(
+        upload_to='images',
+        validators=(
+            validate_file_size,
+        ),
+        # default=static('img/person.png'),
+        null=False,
+        blank=False,
     )
 
     @property

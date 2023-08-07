@@ -10,8 +10,8 @@ class ArtistPhotoCommentForm(forms.ModelForm):
         widgets = {
             'text': forms.Textarea(
                 attrs={
-                    'cols': 60,
-                    'rows': 4,
+                    'cols': 70,
+                    'rows': 2,
                     'placeholder': 'Add a comment...',
                 },
             ),
@@ -25,8 +25,8 @@ class UserPhotoCommentForm(forms.ModelForm):
         widgets = {
             'text': forms.Textarea(
                 attrs={
-                    'cols': 60,
-                    'rows': 4,
+                    'cols': 70,
+                    'rows': 2,
                     'placeholder': 'Add a comment...',
                 },
             ),

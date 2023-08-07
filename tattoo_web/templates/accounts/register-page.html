@@ -5,7 +5,7 @@
         <div>
             <h1>Registration</h1>
             {# TODO: fix error messages #}
-            <form action="{% url 'register user' %}" method="POST">
+            <form action="{% url 'register user' %}" method="POST" enctype="multipart/form-data">
                 <div class="form-group">
                     <label for="{{ form.username.id_for_label }}">Username:</label>
                     {{ form.username|placeholder:'Enter your username' }}
@@ -17,6 +17,13 @@
                     <label for="{{ form.email.id_for_label }}">Email:</label>
                     {{ form.email|placeholder:'Enter your email' }}
                     {% for error in form.email.errors %}
+                        <p class="text-danger">{{ error }}</p>
+                    {% endfor %}
+                </div>
+                <div class="form-group">
+                    <label for="{{ form.profile_picture.id_for_label }}">Profile Picture:</label>
+                    {{ form.profile_picture }}
+                    {% for error in form.profile_picture.errors %}
                         <p class="text-danger">{{ error }}</p>
                     {% endfor %}
                 </div>

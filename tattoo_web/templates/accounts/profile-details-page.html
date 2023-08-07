@@ -16,6 +16,10 @@
 
             <h1>Profile Details</h1>
 
+            <div>
+                <img class="profile-pic" src="{{ profile.profile_picture.url }}" alt="{{ profile.username }}">
+            </div>
+
             <p><span class="color">{{ profile.username }}</span></p>
 
             {% if profile.full_name %}

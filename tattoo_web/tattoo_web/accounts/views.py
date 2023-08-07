@@ -1,5 +1,6 @@
 from django.contrib.auth import views as auth_views, get_user_model, login
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.templatetags.static import static
 from django.urls import reverse_lazy, reverse
 from django.views import generic as views
 

@@ -173,3 +173,8 @@ footer{
 .content:hover {
     color: rgb(1, 58, 224);
 }
+
+/* Buttons */
+.comment-btn {
+    font-size: 24px;
+}

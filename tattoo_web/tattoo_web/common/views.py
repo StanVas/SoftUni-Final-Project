@@ -43,8 +43,6 @@ class ArtistPhotoCommentView(LoginRequiredMixin, views.CreateView):
         form.instance.photo_id = self.kwargs['pk']
         return super().form_valid(form)
 
-    # context_object_name = 'art_comment'
-
 
 class UserPhotoCommentView(LoginRequiredMixin, views.CreateView):
     model = UserPhotoComment

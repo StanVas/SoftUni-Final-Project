@@ -7,7 +7,7 @@
     color: darkorange;
 }
 
-.profile-container h1, p {
+.profile-container h1, .profile-container p {
     justify-content: center;
     text-align: center;
     font-size: 32px;
@@ -19,6 +19,15 @@
     width: 25%;
     border: 2px solid hsl(38.33deg 35.29% 80%);
     border-radius: 65px;
+}
+
+.profile-details .profile-pic {
+    height: 75%;
+    width: 65%;
+    border: 2px solid black;
+    border-radius: 64px;
+    display: block;
+    margin: 0 auto;
 }
 
 .profile-details .full-name {

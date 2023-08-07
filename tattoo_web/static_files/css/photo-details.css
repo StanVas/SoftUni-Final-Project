@@ -1,0 +1,104 @@
+.photo-details {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: 0 auto;
+    text-align: center;
+    width: 75%;
+
+}
+
+.photo-details .special-btn {
+    margin: 1% 27%;
+    justify-content: space-between;
+}
+
+.photo-content {
+    border-radius: 12px;
+}
+
+.photo-content .description {
+    font-size: 20px;
+    font-weight: 600;
+    text-align: left;
+    padding: 12px 300px;
+}
+
+.photo-img img {
+    margin: 0 auto;
+    border: 2px solid #7e8bb6;
+    border-radius: 12px;
+    max-width: 100%;
+}
+
+.photo-content .date {
+    font-size: 20px;
+    text-align: right;
+    padding: 12px 300px;
+}
+
+form p label {
+    font-size: 0;
+}
+
+.photo-details .comment-form {
+    padding: 24px 0;
+    border-radius: 22px;
+}
+
+.photo-details .comment-form .comment-btn {
+    border: 2px solid white;
+    background-color: #7e8bb6;
+    border-radius: 12px;
+    color: white;
+}
+
+.photo-details .comment-form .comment-btn:hover {
+    color: hsl(33.33deg 6.24% 17.19%);
+    border: 2px solid hsl(33.33deg 6.24% 17.19%);
+    transition: 0.2s ease-in-out;
+}
+
+.photo-details .comment-container {
+    padding: 0 300px;
+}
+
+.photo-details .comment-container .comment {
+    border: 1px solid #7e8bb6;
+    background-color: snow;
+    border-radius: 32px;
+    margin-bottom: 16px;
+}
+
+.photo-details .comment-container .comment div {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 16px;
+}
+
+.photo-details .comment-container .comment p {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    padding: 8px 16px;
+}
+
+.photo-details .comment-container .comment div a .color {
+    color: orange;
+
+}
+
+.photo-content .photo-meta {
+    display: flex;
+    flex-direction: row;
+    font-size: 20px;
+    justify-content: space-between;
+    padding: 12px 300px;
+}
+
+.photo-content .photo-meta a .color {
+    color: #e79602;
+    font-weight: 600;
+}
