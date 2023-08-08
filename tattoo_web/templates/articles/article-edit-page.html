@@ -26,6 +26,13 @@
                 {% endfor %}
             </div>
             <div class="form-group">
+                <label for="{{ form.secondary_image.id_for_label }}">Secondary Image:</label>
+                {{ form.secondary_image|placeholder:'Add secondary image' }}
+                {% for error in form.secondary_image.errors %}
+                    <p class="text-danger">{{ error }}</p>
+                {% endfor %}
+            </div>
+            <div class="form-group">
                 <label for="{{ form.extra_image.id_for_label }}">Extra image:</label>
                 {{ form.extra_image|placeholder:'Add extra image' }}
                 {% for error in form.extra_image.errors %}
@@ -33,9 +40,23 @@
                 {% endfor %}
             </div>
             <div class="form-group">
+                <label for="{{ form.byline.id_for_label }}">Byline:</label>
+                {{ form.byline|placeholder:'Add byline' }}
+                {% for error in form.byline.errors %}
+                    <p class="text-danger">{{ error }}</p>
+                {% endfor %}
+            </div>
+            <div class="form-group">
                 <label for="{{ form.main_text.id_for_label }}">Main text:</label>
                 {{ form.main_text|placeholder:'Add main text' }}
                 {% for error in form.main_text.errors %}
+                    <p class="text-danger">{{ error }}</p>
+                {% endfor %}
+            </div>
+            <div class="form-group">
+                <label for="{{ form.conclusion.id_for_label }}">Conclusion:</label>
+                {{ form.conclusion|placeholder:'Add conclusion' }}
+                {% for error in form.conclusion.errors %}
                     <p class="text-danger">{{ error }}</p>
                 {% endfor %}
             </div>

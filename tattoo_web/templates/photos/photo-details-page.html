@@ -5,11 +5,15 @@
         {% if user.is_staff %}
             <ul class="special-btn">
                 <li>
-                    <a href="{% url 'edit photo' pk=object.pk %}">Edit Photo</a>
+                    <a href="{% url 'edit photo' pk=object.pk %}">
+                        <i class="fas fa-edit"></i>Edit Photo
+                    </a>
                 </li>
 
                 <li>
-                    <a href="{% url 'delete photo' pk=object.pk %}">Delete Photo</a>
+                    <a href="{% url 'delete photo' pk=object.pk %}">
+                        <i class="fas fa-trash-alt"></i>Delete Photo
+                    </a>
                 </li>
             </ul>
         {% endif %}
@@ -50,8 +54,12 @@
 
                 {% if user.is_authenticated and user == comment.user or user.is_staff %}
                     <div class="special-btn">
-                        <a href="{% url 'edit comment art' pk=comment.pk %}">Edit</a>
-                        <a href="{% url 'delete comment art' pk=comment.pk %}">Delete</a>
+                        <a href="{% url 'edit comment art' pk=comment.pk %}">
+                            <i class="fas fa-edit"></i>Edit
+                        </a>
+                        <a href="{% url 'delete comment art' pk=comment.pk %}">
+                            <i class="fas fa-trash-alt"></i>Delete
+                        </a>
                     </div>
                 {% endif %}
             {% endfor %}

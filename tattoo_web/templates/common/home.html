@@ -2,9 +2,8 @@
 {% load static %}
 {% block page_content %}
     <img class="logo-img" width="700px" src="{% static 'img/image333.png' %}" alt="">
-    <h1>Welcome to the Home Page</h1>
 
-    <h2>Last Four Articles:</h2>
+    <h2>Articles:</h2>
     <ul class="articles">
         {% for article in latest_articles %}
             <li class="article-container">
@@ -20,7 +19,7 @@
         {% endfor %}
     </ul>
 
-    <h2>Last Four Images:</h2>
+    <h2>Images:</h2>
     <ul class="art-photos">
         {% for image in latest_images %}
             <li class="art-photo">

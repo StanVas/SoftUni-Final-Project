@@ -27,6 +27,10 @@ class AboutMeView(views.TemplateView):
     template_name = 'common/about_me.html'
 
 
+class ContactsView(views.TemplateView):
+    template_name = 'common/contacts.html'
+
+
 class ArtistPhotoCommentView(LoginRequiredMixin, views.CreateView):
     model = ArtistPhotoComment
     form_class = ArtistPhotoCommentForm

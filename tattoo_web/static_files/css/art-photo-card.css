@@ -1,9 +1,9 @@
 /* Artist Photo */
 .art-photos {
     display: flex;
+    flex-wrap: wrap;
     gap: 48px;
     align-items: center;
-    flex-wrap: wrap;
 }
 
 .art-photo {
