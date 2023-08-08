@@ -2,8 +2,8 @@
 {% load custom_filters %}
 {% block page_content %}
     <div>
-        <div>
-            <h1>Registration</h1>
+        <div class="form-container">
+            <h1>Register Account</h1>
             <form action="{% url 'register user' %}" method="POST" enctype="multipart/form-data">
                 <div class="form-group">
                     <label for="{{ form.username.id_for_label }}">Username:</label>
@@ -45,10 +45,10 @@
                 {% csrf_token %}
                 <button type="submit">Register</button>
             </form>
-        </div>
-        <div>
-            {# TODO: add `next` here #}
-            <p>Have an account? <a href="{% url 'login user' %}">Log in</a></p>
+            <div>
+                {# TODO: add `next` here #}
+                <p>Have an account? <a href="{% url 'login user' %}">Log In Here</a></p>
+            </div>
         </div>
     </div>
 {% endblock %}

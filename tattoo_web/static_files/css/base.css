@@ -2,6 +2,10 @@ html {
     scroll-behavior: smooth;
 }
 
+* {
+    box-sizing: border-box
+}
+
 body {
     /*background-color: #070e27;*/
     /*background-color: hsl(33.33deg 7.09% 75.1%);*/
@@ -66,11 +70,6 @@ header {
 }
 
 .nav-group a:hover {
-    background-color: hsl(38.33deg 35.29% 80%);
-    color: hsl(33.33deg 6.24% 17.19%);
-}
-
-.nav-group a i:hover {
     background-color: hsl(38.33deg 35.29% 80%);
     color: hsl(33.33deg 6.24% 17.19%);
 }
