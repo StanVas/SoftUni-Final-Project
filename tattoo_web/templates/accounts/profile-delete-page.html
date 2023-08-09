@@ -1,28 +1,29 @@
 {% extends 'base/base.html' %}
 {% load static %}
 {% block page_content %}
-    <div>
-        <h1>
-            Confirm Deleting Profile
-        </h1>
-        {% if user.is_authenticated and user.pk == profile.pk or user.is_staff %}
-            <p>
-                Are you sure you want to delete your profile?
-            </p>
-            <form action="{% url 'delete user' pk=object.pk %}" method="post">
+    <section>
+        <div class="form-container delete-form">
+            <h1>
+                Confirm Delete Profile
+            </h1>
+            {% if user.is_authenticated and user.pk == profile.pk or user.is_staff %}
+                <p class="delete-msg">
+                    Are you sure you want to delete your profile?
+                </p>
 
-                {% csrf_token %}
+                <form action="{% url 'delete user' pk=object.pk %}" method="post">
 
-                <button type="submit">Delete Profile</button>
+                    {% csrf_token %}
 
-                <a href="{% url 'details user' pk=object.pk %}">Go Back</a>
+                    <button type="submit">Delete Profile</button>
 
-                {# TODO: Img here#}
-                <img src="{% static ''%}" alt="">
-            </form>
-        {% else %}
-            <p>You can't delete someone else's profile</p>
-        {% endif %}
+                    <a href="{% url 'details user' pk=object.pk %}">Go Back</a>
 
-    </div>
+                </form>
+
+            {% else %}
+                <p>You can't delete someone else's profile</p>
+            {% endif %}
+        </div>
+    </section>
 {% endblock %}

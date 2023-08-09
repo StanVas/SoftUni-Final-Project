@@ -6,6 +6,25 @@
     width: 1000px;
 }
 
+.about-me-container div h4{
+    color: #894c01;
+}
+
+.about-me-container .color {
+    color: #894c01;
+}
+
+.about-me-container h3 .color{
+    color: #894c01;
+}
+
+.about-me-container .end div{
+    margin-bottom: 12px;
+    font-size: 18px;
+    color: #894c01;
+    font-weight: 600;
+}
+
 .contacts {
     display: flex;
     flex-direction: column;
@@ -23,4 +42,8 @@
 .contacts p {
     padding: 8px;
     font-weight: 550;
+}
+
+.contacts .color{
+    color: #894c01;
 }

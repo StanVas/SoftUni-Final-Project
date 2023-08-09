@@ -1,18 +1,27 @@
 {% extends 'base/base.html' %}
 {% block page_content %}
-    <div>
-        {% if request.user.is_staff or object.user.pk == request.user.pk %}
-            <form class="form" action="{% url 'delete user photo' pk=object.pk %}" method="POST">
-                <h2>Delete Photo</h2>
+    <section>
+        <div class="form-container delete-form">
+            {% if request.user.is_staff or object.user.pk == request.user.pk %}
+                <form action="{% url 'delete user photo' pk=object.pk %}" method="POST">
+                    <h1>
+                        Confirm photo delete
+                    </h1>
+                    <p class="delete-msg">
+                        Are you sure you want to delete this photo?
+                        <br>
+                        "{{ userphoto.photo }}"
+                    </p>
 
-                {% csrf_token %}
+                    {% csrf_token %}
 
-                <button type="submit">Delete Picture</button>
+                    <button class="delete-btn" type="submit">Delete Picture</button>
 
-                <a class="anchor_button" href="{% url 'details user' pk=object.user.pk %}">Go to Profile</a>
-            </form>
-        {% else %}
-            <h3>You can't delete this photo</h3>
-        {% endif %}
-    </div>
+                    <a href="{% url 'details user' pk=object.user.pk %}">Go to Profile</a>
+                </form>
+            {% else %}
+                <h3>You can't delete this photo</h3>
+            {% endif %}
+        </div>
+    </section>
 {% endblock %}

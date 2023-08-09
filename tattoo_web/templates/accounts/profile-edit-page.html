@@ -1,7 +1,7 @@
 {% extends 'base/base.html' %}
 {% load custom_filters %}
 {% block page_content %}
-    <div>
+    <section>
         <div class="form-container">
             <h2>{{ user.username }}'s Profile</h2>
             {% if user.is_authenticated and user.pk == profile.pk or user.is_staff %}
@@ -28,8 +28,8 @@
                         {% endfor %}
                     </div>
                     <div class="form-group">
-                        <label for="{{ form.profile_picture.id_for_label }}">Profile Picture:</label>
-                        {{ form.profile_picture|placeholder:'Add profile picture' }}
+                        <label for="{{ form.profile_picture.id_for_label }}">Profile Picture </label>
+                        {{ form.profile_picture }}
                         {% for error in form.profile_picture.errors %}
                             <p class="text-danger">{{ error }}</p>
                         {% endfor %}
@@ -45,5 +45,5 @@
                 <p>You can't edit someone else's profile</p>
             {% endif %}
         </div>
-    </div>
+    </section>
 {% endblock %}

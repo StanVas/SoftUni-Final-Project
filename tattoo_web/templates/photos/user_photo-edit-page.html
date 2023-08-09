@@ -1,20 +1,37 @@
 {% extends 'base/base.html' %}
+{% load custom_filters %}
 {% block page_content %}
-    <div>
-        {% if request.user.is_staff or object.user.pk == request.user.pk %}
-            <h2>Edit Photo</h2>
-            <form action="{% url 'edit user photo' pk=object.pk %}" method="POST" enctype="multipart/form-data">
+    <section>
+        <div class="form-container">
+            {% if request.user.is_staff or object.user.pk == request.user.pk %}
+                <h2>Edit Photo</h2>
+                <form action="{% url 'edit user photo' pk=object.pk %}" method="POST" enctype="multipart/form-data">
 
-                {{ form.as_p }}
+                    <div class="form-group">
+                        <label for="{{ form.description.id_for_label }}">Description: </label>
+                        {{ form.description|placeholder:'Enter your description' }}
+                        {% for error in form.description.errors %}
+                            <p class="text-danger">{{ error }}</p>
+                        {% endfor %}
+                    </div>
 
-                {% csrf_token %}
+                    <div class="form-group">
+                        <label for="{{ form.photo.id_for_label }}">Photo</label>
+                        {{ form.photo }}
+                        {% for error in form.photo.errors %}
+                            <p class="text-danger">{{ error }}</p>
+                        {% endfor %}
+                    </div>
 
-                <button class="submit-btn" type="submit">Edit Photo</button>
+                    {% csrf_token %}
 
-                <a class="anchor_button" href="{% url 'details user' pk=object.user.pk %}">Go to Profile</a>
-            </form>
-        {% else %}
-            <h3>You can't edit this photo</h3>
-        {% endif %}
-    </div>
+                    <button type="submit">Edit Photo</button>
+
+                    <a href="{% url 'details user' pk=object.user.pk %}">Go to Profile</a>
+                </form>
+            {% else %}
+                <h3>You can't edit this photo</h3>
+            {% endif %}
+        </div>
+    </section>
 {% endblock %}
