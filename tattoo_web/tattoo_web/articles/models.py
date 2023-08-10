@@ -4,7 +4,6 @@ from django.db import models
 from tattoo_web.core.utils import validate_file_size
 
 
-# TODO: Change all null and black
 class Article(models.Model):
     TITLE_MAX_LENGTH = 50
     TITLE_MIN_LENGTH = 5
@@ -70,3 +69,6 @@ class Article(models.Model):
         null=False,
         blank=False,
     )
+
+    class Meta:
+        ordering = ['-id']

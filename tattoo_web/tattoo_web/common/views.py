@@ -15,7 +15,7 @@ class HomeView(views.TemplateView):
     def get(self, request, *args, **kwargs):
         # Retrieve the last four articles from the database
         latest_articles = Article.objects.all().order_by('-id')[:4]
-        latest_images = ArtistPhoto.objects.all().order_by('-id')[:4]
+        latest_images = ArtistPhoto.objects.all().order_by('-date_of_publication')[:4]
         # Pass the latest articles to the template context
         context = {'latest_articles': latest_articles, 'latest_images': latest_images}
 
@@ -72,14 +72,6 @@ class UserPhotoCommentView(LoginRequiredMixin, views.CreateView):
 
 
 def photo_like(request, photo_id):
-    pass
-
-
-def article_like(request, article_id):
-    pass
-
-
-def article_comment(request, article_id):
     pass
 
 

@@ -33,6 +33,9 @@ class ArtistPhotoComment(models.Model):
         blank=True,
     )
 
+    class Meta:
+        ordering = ['-date_time_of_publication']
+
 
 class UserPhotoComment(models.Model):
     MAX_TEXT_LENGTH = 300
@@ -63,15 +66,8 @@ class UserPhotoComment(models.Model):
         blank=True,
     )
 
+    class Meta:
+        ordering = ['-date_time_of_publication']
 
 # class PhotoLike(models.Model):
-#     pass
-#
-#
-# TODO: maybe remove both models for Article
-# class ArticleComment(models.Model):
-#     pass
-#
-#
-# class ArticleLike(models.Model):
 #     pass

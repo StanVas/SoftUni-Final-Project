@@ -70,10 +70,12 @@ header {
 
 .nav-item a {
     border-radius: 4px;
+    padding: 0 5px;
 }
 
 .nav-user-item a {
     border-radius: 4px;
+    padding: 0 5px;
 }
 
 /* Main */

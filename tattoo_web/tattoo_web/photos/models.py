@@ -9,7 +9,6 @@ class ArtistPhoto(models.Model):
     MIN_DESCRIPTION_LENGTH = 10
     MAX_DESCRIPTION_LENGTH = 300
 
-    # TODO: change this to ImageField / make it blank=False
     photo = models.ImageField(
         upload_to='images',
         validators=(
@@ -34,19 +33,21 @@ class ArtistPhoto(models.Model):
         blank=True,
     )
 
+    class Meta:
+        ordering = ['-date_of_publication']
+
 
 class UserPhoto(models.Model):
     MIN_DESCRIPTION_LENGTH = 5
     MAX_DESCRIPTION_LENGTH = 300
 
-    # TODO: change this to ImageField / make it blank=False
     photo = models.ImageField(
         upload_to='images',
         validators=(
             validate_file_size,
         ),
         null=False,
-        blank=True,
+        blank=False,
     )
 
     description = models.CharField(
@@ -67,4 +68,9 @@ class UserPhoto(models.Model):
     user = models.ForeignKey(
         UserProfile,
         on_delete=models.CASCADE,
+        null=False,
+        blank=False,
     )
+
+    class Meta:
+        ordering = ['-date_of_publication']

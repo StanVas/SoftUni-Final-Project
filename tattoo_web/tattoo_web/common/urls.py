@@ -1,6 +1,6 @@
 from django.urls import path
 
-from tattoo_web.common.views import HomeView, photo_like, article_like, article_comment, \
+from tattoo_web.common.views import HomeView, photo_like, \
     copy_link_to_clipboard, ArtCommentEditView, ArtCommentDeleteView, UserCommentEditView, UserCommentDeleteView, \
     AboutMeView, ContactsView
 
@@ -16,8 +16,6 @@ urlpatterns = (
 
     path('like/<int:photo_id>/', photo_like, name='like photo'),
 
-    path('like/<int:article_id>/', article_like, name='like article'),
-    path('comment/<int:article_id>/', article_comment, name='comment article'),
     path('share/<int:photo_id>/', copy_link_to_clipboard, name='share photo'),
     # article share
 )

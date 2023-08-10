@@ -1,7 +1,6 @@
 from django.contrib.auth.models import AbstractUser
 from django.core.validators import MinLengthValidator
 from django.db import models
-from django.templatetags.static import static
 
 from tattoo_web.accounts.validators import validate_only_alphabetical
 from tattoo_web.core.utils import validate_file_size
@@ -63,4 +62,10 @@ class UserProfile(AbstractUser):
 
     @property
     def full_name(self):
+        if self.first_name is None and self.last_name is None:
+            return ''
+        elif self.first_name is None:
+            return f'{self.last_name}'
+        elif self.last_name is None:
+            return f'{self.first_name}'
         return f'{self.first_name} {self.last_name}'
