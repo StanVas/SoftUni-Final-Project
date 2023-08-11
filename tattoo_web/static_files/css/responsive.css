@@ -1,0 +1,109 @@
+@media (max-width: 1800px){
+    .photo-details .comment-container {
+        padding: 0 180px;
+    }
+    .photo-details .photo-meta {
+        padding: 12px 150px;
+    }
+    .photo-details .description {
+        padding: 12px 150px;
+    }
+    .form-group a {
+        font-size: 18px;
+    }
+}
+@media (max-width: 1366px) {
+    header {
+        display: inline-block;
+        padding: 12px;
+    }
+    header .logo-header {
+        width: 120px;
+        margin: auto;
+    }
+    .article-container{
+        width: 280px;
+        margin: auto;
+    }
+    .art-photo {
+        width: 280px;
+        margin: auto;
+    }
+    .profile-gallery .user-photo {
+        width: 280px;
+    }
+    .photo-details .photo-meta {
+        padding: 12px 120px;
+    }
+    .photo-details .description {
+        padding: 12px 120px;
+    }
+    .photo-details .date, .description {
+        padding: 12px 120px;
+    }
+    .profile-container .profile-details .special-btn {
+        display: block;
+    }
+    .photo-details .comment-container {
+        padding: 0 65px;
+    }
+    .photo-details .special-btn {
+        margin: 48px 68px;
+    }
+    .about-me-container {
+        width: 800px;
+    }
+    .contacts {
+        width: 800px;
+    }
+    .article-box {
+        width: 800px;
+    }
+    .article-content {
+        width: 900px;
+    }
+    .form-container {
+        width: 50%;
+        align-items: center;
+    }
+    .form-group a {
+        font-size: 14px;
+    }
+    .delete-form .delete-msg {
+        font-size: 18px;
+    }
+}
+@media (max-width: 1000px) {
+    .nav-group {
+        gap: 48px;
+    }
+    .article-container{
+        width: 280px;
+        margin: auto;
+    }
+    .art-photo {
+        width: 280px;
+        margin: auto;
+    }
+    .profile-gallery .user-photo {
+        width: 380px;
+        margin: auto;
+    }
+    .profile-container .profile-details .special-btn {
+        display: block;
+        margin: 32px 0 0 0;
+        padding: 10px;
+    }
+    .photo-details .photo-meta {
+        padding: 12px 32px;
+    }
+    .photo-details .description {
+        padding: 12px 32px;
+    }
+    .footer-container{
+        padding: 6px;
+    }
+    .delete-form .delete-msg {
+        font-size: 14px;
+    }
+}
