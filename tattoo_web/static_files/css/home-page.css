@@ -1,0 +1,19 @@
+.home-container h2 {
+    border-bottom: 3px solid hsl(33.33deg 6.24% 17.19%);
+}
+
+.home-container .articles {
+    border: 3px solid #7e8bb6 ;
+    background-color: hsl(33.33deg 6.24% 17.19%);
+    border-radius: 22px;
+    padding-top: 16px;
+    padding-bottom: 16px;
+}
+
+.home-container .art-photos {
+    border: 3px solid #7e8bb6 ;
+    background-color: hsl(33.33deg 6.24% 17.19%);
+    border-radius: 22px;
+    padding-top: 16px;
+    padding-bottom: 16px;
+}

@@ -14,7 +14,7 @@
     overflow: hidden;
     position: relative;
     /*color: white;*/
-    border: 2px solid gray;
+    border: 2px solid #7e8bb6;
 }
 
 .article-container .content {
