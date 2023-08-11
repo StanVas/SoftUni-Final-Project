@@ -1,7 +1,7 @@
 {% extends 'base/base.html' %}
 {% block page_content %}
     <div>
-        {% if user.is_staff %}
+        {% if user.is_superuser %}
             <ul class="special-btn">
                 <li><a href="{% url 'create article' %}"><i class="fas fa-plus"></i>Create article</a></li>
             </ul>

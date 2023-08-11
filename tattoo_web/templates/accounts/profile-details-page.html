@@ -3,7 +3,7 @@
 {% block page_content %}
     <section class="profile-container">
         <div class="profile-details">
-            {% if user.is_authenticated and user.pk == profile.pk or user.is_staff %}
+            {% if user.is_authenticated and user.pk == profile.pk or user.is_superuser %}
                 <ul class="special-btn">
                     <li>
                         <a href="{% url 'edit user' pk=object.pk %}">
@@ -33,7 +33,7 @@
         </div>
 
         <div class="profile-gallery">
-            {% if user.is_authenticated and user.pk == profile.pk or user.is_staff %}
+            {% if user.is_authenticated and user.pk == profile.pk or user.is_superuser %}
                 <ul class="special-btn">
                     <li>
                         <a href="{% url 'add user photo' pk=object.pk %}">

@@ -2,7 +2,7 @@
 {% load static %}
 {% block page_content %}
     <div>
-        {% if user.is_staff %}
+        {% if user.is_superuser %}
             <ul class="special-btn">
                 <li><a href="{% url 'add photo' %}"><i class="fas fa-plus"></i>Add photo</a></li>
             </ul>

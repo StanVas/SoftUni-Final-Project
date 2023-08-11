@@ -6,7 +6,7 @@
             <h1>
                 Confirm Delete Profile
             </h1>
-            {% if user.is_authenticated and user.pk == profile.pk or user.is_staff %}
+            {% if user.is_authenticated and user.pk == profile.pk or user.is_superuser %}
                 <p class="delete-msg">
                     Are you sure you want to delete your profile?
                 </p>

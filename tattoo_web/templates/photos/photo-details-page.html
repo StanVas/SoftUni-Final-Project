@@ -2,7 +2,7 @@
 {% load static %}
 {% block page_content %}
     <div class="photo-details">
-        {% if user.is_staff %}
+        {% if user.is_superuser %}
             <ul class="special-btn">
                 <li>
                     <a href="{% url 'edit photo' pk=object.pk %}">
@@ -52,7 +52,7 @@
                     <p>{{ comment.text }}</p>
                 </div>
 
-                {% if user.is_authenticated and user == comment.user or user.is_staff %}
+                {% if user.is_authenticated and user == comment.user or user.is_superuser %}
                     <div class="special-btn">
                         <a href="{% url 'edit comment art' pk=comment.pk %}">
                             <i class="fas fa-edit"></i>Edit

@@ -4,7 +4,7 @@
     <section>
         <div class="form-container">
             <h2>{{ user.username }}'s Profile</h2>
-            {% if user.is_authenticated and user.pk == profile.pk or user.is_staff %}
+            {% if user.is_authenticated and user.pk == profile.pk or user.is_superuser %}
                 <form action="{% url 'edit user' pk=object.pk %}" method="POST" enctype="multipart/form-data">
                     <div class="form-group">
                         <label for="{{ form.first_name.id_for_label }}">First Name:</label>

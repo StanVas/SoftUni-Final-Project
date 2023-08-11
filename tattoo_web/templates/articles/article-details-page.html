@@ -1,7 +1,7 @@
 {% extends 'base/base.html' %}
 {% block page_content %}
     <div class="article-box">
-        {% if user.is_staff %}
+        {% if user.is_superuser %}
             <ul class="special-btn">
                 <li>
                     <a href="{% url 'edit article' pk=object.pk %}">
