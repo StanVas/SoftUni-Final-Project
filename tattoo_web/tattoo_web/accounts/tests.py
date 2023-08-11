@@ -2,7 +2,8 @@ import os
 
 from django.core.exceptions import ValidationError
 from django.core.files.uploadedfile import SimpleUploadedFile
-from django.test import TestCase
+from django.test import TestCase, Client
+from django.urls import reverse
 
 from tattoo_web.accounts.forms import RegisterUserForm, EditUserForm
 from tattoo_web.accounts.models import UserProfile
@@ -128,8 +129,6 @@ class AccountsFormsTestCase(TestCase):
         # self.assertEqual(user.profile_picture.name, 'test_img.png')   # here is changing the file name
         # self.assertEqual(user.password, '9XkxsTh^y5D5!2gPy&Vn')   # here it crypt password and I can't check it
 
-        user.delete()
-
     def test_register_user__whenInvalid__expect_to_raise(self):
         initial_data = {
             'username': 'TestUser1',
@@ -181,7 +180,7 @@ class AccountsFormsTestCase(TestCase):
 
         self.assertTrue(form.is_valid())
 
-        updated_user = form.save()
+        form.save()
 
         updated_user = UserProfile.objects.get(pk=user.pk)
 
@@ -189,8 +188,6 @@ class AccountsFormsTestCase(TestCase):
         self.assertEqual(updated_user.last_name, 'UserEdit')
         self.assertEqual(updated_user.email, 'user@edit.com')
         self.assertEqual(updated_user.profile_picture, 'images/small.gif')
-
-        updated_user.delete()
 
     def test_edit_user__whenInvalid__expect_to_raise(self):
         initial_data = {
@@ -230,4 +227,92 @@ class AccountsFormsTestCase(TestCase):
             "Must contain only alphabetical letters!"
         )
 
-        user.delete()
+
+class ProfileDetailsViewTests(TestCase):
+    VALID_USER_POST_DATA = {
+        'username': 'TestUser',
+        'email': 'email@test.com',
+        'first_name': 'Test',
+        'last_name': 'Test',
+        'profile_picture': 'images/small.gif'
+    }
+
+    def test_profile_details_view__no_photos(self):
+        UserProfile.objects.create(**self.VALID_USER_POST_DATA)
+        created_user = UserProfile.objects.get(username='TestUser')
+
+        response = self.client.get(
+            reverse('details user', args=[created_user.pk]),
+        )
+
+        context = response.context
+
+        self.assertEqual(200, response.status_code)
+        self.assertEqual(context['profile'].username, 'TestUser')
+        self.assertEqual(context['profile'].full_name, 'Test Test')
+        self.assertTemplateUsed(response, 'accounts/profile-details-page.html')
+
+
+class LoginUserViewTests(TestCase):
+    VALID_USER_POST_DATA = {
+        'username': 'TestUser',
+        'email': 'email@test.com',
+        'profile_picture': 'images/small.gif',
+        'password': '9XkxsTh^y5D5!2gPy&Vn'
+    }
+
+    VALID_LOGIN_DATA = {
+        'username': 'TestUser',
+        'password': '9XkxsTh^y5D5!2gPy&Vn'
+    }
+
+    INVALID_LOGIN_DATA = {
+        'username': 'InvalidTestUser',
+        'password': '9XkxsTh^y5D5!2gPy&Vn'
+    }
+
+    def test_login_user__valid_data(self):
+        UserProfile.objects.create_user(**self.VALID_USER_POST_DATA)
+
+        client = Client()
+
+        login_url = reverse('login user')
+
+        response = client.post(login_url, data=self.VALID_LOGIN_DATA, follow=True)
+
+        self.assertTrue(response.context['user'].is_authenticated)
+
+        self.assertEqual(response.status_code, 200)
+
+    def test_logout_user(self):
+        UserProfile.objects.create_user(**self.VALID_USER_POST_DATA)
+
+        client = Client()
+
+        login_url = reverse('login user')
+        logout_url = reverse('logout user')
+
+        response = client.post(login_url, data=self.VALID_LOGIN_DATA, follow=True)
+
+        self.assertTrue(response.context['user'].is_authenticated)
+
+        response = client.get(logout_url, follow=True)
+
+        self.assertFalse(response.context['user'].is_authenticated)
+
+        self.assertEqual(response.status_code, 200)
+
+    def test_login_user__inValid_data(self):
+        UserProfile.objects.create_user(**self.VALID_USER_POST_DATA)
+
+        client = Client()
+
+        login_url = reverse('login user')
+
+        response = client.post(login_url, data=self.INVALID_LOGIN_DATA, follow=True)
+
+        self.assertFalse(response.context['user'].is_authenticated)
+
+        self.assertEqual(response.status_code, 200)
+
+
