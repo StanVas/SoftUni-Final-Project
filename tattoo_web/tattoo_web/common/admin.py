@@ -10,6 +10,7 @@ class ArtistPhotoCommentAdmin(admin.ModelAdmin):
     fields = ('user', 'date_time_of_publication', 'text', 'photo',)
     readonly_fields = ('user', 'date_time_of_publication', 'photo',)
 
+
 @admin.register(UserPhotoComment)
 class UserPhotoCommentAdmin(admin.ModelAdmin):
     list_display = ('pk', 'photo', 'date_time_of_publication')

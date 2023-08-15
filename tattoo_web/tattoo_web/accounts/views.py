@@ -1,6 +1,5 @@
 from django.contrib.auth import views as auth_views, get_user_model, login
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.templatetags.static import static
 from django.urls import reverse_lazy, reverse
 from django.views import generic as views
 
@@ -27,6 +26,11 @@ class RegisterUserView(views.CreateView):
 
 class LoginUserView(auth_views.LoginView):
     template_name = 'accounts/login-page.html'
+
+    def form_valid(self, form):
+        # This method is called when the form is valid.
+        # You can add any custom logic here if needed.
+        return super().form_valid(form)
 
 
 class LogoutUserView(auth_views.LogoutView):
