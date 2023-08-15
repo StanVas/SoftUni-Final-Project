@@ -2,6 +2,7 @@ import os
 
 from django.core.exceptions import ValidationError
 from django.core.files.uploadedfile import SimpleUploadedFile
+from django.db import DataError
 from django.test import TestCase, Client
 from django.urls import reverse
 
@@ -43,7 +44,7 @@ class UserProfileModelTestCase(TestCase):
             'username': 't' * UserProfile.USER_NAME_MAX_LENGTH + 't'
         }
 
-        with self.assertRaises(ValidationError):
+        with self.assertRaises(DataError):
             test_user = UserProfile.objects.create(
                 **invalid_data,
             )
