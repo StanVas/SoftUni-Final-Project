@@ -1,0 +1,70 @@
+{% extends 'base/base.html' %}
+{% load custom_filters %}
+{% block page_content %}
+    <section class="review-section">
+        <div>
+            {% if user.is_authenticated %}
+                <ul class="special-btn">
+                    <li>
+                        <a href="{% url 'create review' %}">
+                            <i class="fas fa-plus"></i>Add Review
+                        </a>
+                    </li>
+                </ul>
+            {% endif %}
+
+            <div class="review-summary">
+                <div class="total-reviews">
+                    Total Reviews: {{ total_reviews }}
+                </div>
+                <div class="rating">
+                    Average Rating: {{ average_rating|floatformat:1 }}
+                </div>
+            </div>
+
+            {% if not reviews %}
+                <h3>No Reviews Yet</h3>
+            {% else %}
+                <div class="reviews-container">
+                    {% for review in reviews %}
+                        <div class="review-box">
+                            <div class="profile-pic">
+                                <a href="{% url 'details user' pk=review.user.pk %}">
+                                    <img src="{{ review.user.profile_picture.url }}"
+                                         alt="{{ review.user.username }}">
+                                </a>
+                            </div>
+                            <div>
+                                <p class="review-details">
+                                    <a href="{% url 'details user' pk=review.user.pk %}">
+                                        {{ review.user.username }}
+                                    </a>
+                                    {{ review.date_of_publication }}
+                                </p>
+                                <p class="review-rating">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    {{ review.rating }}
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                </p>
+                                <p class="review-text">{{ review.review }}</p>
+                            </div>
+                        </div>
+
+                        {% if user.is_authenticated and user == review.user or user.is_superuser %}
+                            <div class="special-btn">
+                                <a href="{% url 'edit review' pk=review.pk %}"><i
+                                        class="fas fa-edit"></i>Edit</a>
+                                <a href="{% url 'delete review' pk=review.pk %}"><i
+                                        class="fas fa-trash-alt"></i>Delete</a>
+                            </div>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+            {% endif %}
+        </div>
+    </section>
+{% endblock %}

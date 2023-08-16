@@ -1,12 +1,14 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render
-from django.urls import reverse
+from django.urls import reverse, reverse_lazy
 from django.views import generic as views
 
 from tattoo_web.articles.models import Article
-from tattoo_web.common.forms import ArtistPhotoCommentForm, UserPhotoCommentForm
-from tattoo_web.common.models import ArtistPhotoComment, UserPhotoComment
+from tattoo_web.common.forms import ArtistPhotoCommentForm, UserPhotoCommentForm, UserReviewForm
+from tattoo_web.common.models import ArtistPhotoComment, UserPhotoComment, UserReview
 from tattoo_web.photos.models import UserPhoto, ArtistPhoto
+
+from django.db.models import Avg
 
 
 class HomeView(views.TemplateView):
@@ -29,6 +31,49 @@ class AboutMeView(views.TemplateView):
 
 class ContactsView(views.TemplateView):
     template_name = 'common/contacts.html'
+
+
+class UserReviewsView(views.TemplateView):
+    model = UserReview
+    template_name = 'common/user-reviews.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['reviews'] = UserReview.objects.all()
+        context['average_rating'] = UserReview.objects.aggregate(Avg('rating'))['rating__avg']
+        context['total_reviews'] = UserReview.objects.count()
+        return context
+
+
+class CreateReviewView(LoginRequiredMixin, views.CreateView):
+    model = UserReview
+    form_class = UserReviewForm
+
+    template_name = 'common/create-review-form.html'
+
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        return super().form_valid(form)
+
+    def get_form(self, *args, **kwargs):
+        form = super().get_form(*args, **kwargs)
+        form.instance.user = self.request.user
+        return form
+
+    success_url = reverse_lazy('reviews')
+
+
+class EditReviewView(LoginRequiredMixin, views.UpdateView):
+    model = UserReview
+    form_class = UserReviewForm
+
+    template_name = 'common/edit-review-form.html'
+
+
+class DeleteReviewView(LoginRequiredMixin, views.DeleteView):
+    model = UserReview
+
+    template_name = 'common/delete-review-form.html'
 
 
 class ArtistPhotoCommentView(LoginRequiredMixin, views.CreateView):

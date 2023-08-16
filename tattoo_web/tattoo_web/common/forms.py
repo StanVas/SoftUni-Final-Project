@@ -1,6 +1,6 @@
 from django import forms
 
-from tattoo_web.common.models import ArtistPhotoComment, UserPhotoComment
+from tattoo_web.common.models import ArtistPhotoComment, UserPhotoComment, UserReview
 
 
 class ArtistPhotoCommentForm(forms.ModelForm):
@@ -31,3 +31,9 @@ class UserPhotoCommentForm(forms.ModelForm):
                 },
             ),
         }
+
+
+class UserReviewForm(forms.ModelForm):
+    class Meta:
+        model = UserReview
+        fields = ['rating', 'review']

@@ -1,0 +1,82 @@
+.review-section {
+    display: flex;
+    justify-content: center;
+}
+
+.review-box {
+    margin: 18px 0;
+    display: flex;
+    gap: 12px;
+    width: 600px;
+    border-radius: 32px;
+    background-color: whitesmoke;
+    border: 2px solid darkorange;
+}
+
+.review-box .profile-pic {
+    margin-right: 18px;
+}
+
+.review-box .profile-pic a {
+    display: flex;
+    width: 120px;
+
+}
+
+.review-box .profile-pic a img {
+    border-radius: 32px;
+    margin: 12px;
+}
+
+.review-box .review-details, .review-box .review-details a {
+    color: darkorange;
+    display: flex;
+    justify-content: space-between;
+    font-weight: 700;
+    font-size: 24px;
+    margin: 4px 14px;
+}
+
+.review-rating .fa-star {
+    color: dodgerblue;
+    font-size: 18px;
+}
+
+.review-rating {
+    color: darkorange;
+    font-size: 26px;
+    font-weight: 700;
+    justify-content: space-between;
+}
+
+.review-text {
+    font-weight: 600;
+    padding: 6px 2px 12px 2px;
+}
+
+.review-summary {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: whitesmoke;
+    border: 2px solid darkorange;
+    padding: 22px;
+    border-radius: 5px;
+    box-shadow: 0 12px 14px rgba(0, 0, 0, 0.1);
+}
+
+.review-summary .rating {
+    font-size: 24px;
+    font-weight: 700;
+    color: darkorange;
+}
+
+.review-summary .total-reviews {
+    font-size: 20px;
+    color: darkorange;
+    font-weight: 600;
+}
+
+.reviews-container .special-btn {
+    justify-content: space-around;
+}
