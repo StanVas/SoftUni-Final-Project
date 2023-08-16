@@ -105,3 +105,6 @@ class UserReview(models.Model):
         null=False,
         blank=True,
     )
+
+    class Meta:
+        ordering = ['-date_of_publication']

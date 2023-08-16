@@ -69,11 +69,19 @@ class EditReviewView(LoginRequiredMixin, views.UpdateView):
 
     template_name = 'common/edit-review-form.html'
 
+    success_url = reverse_lazy('reviews')
+
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        return super().form_valid(form)
+
 
 class DeleteReviewView(LoginRequiredMixin, views.DeleteView):
     model = UserReview
 
     template_name = 'common/delete-review-form.html'
+
+    success_url = reverse_lazy('reviews')
 
 
 class ArtistPhotoCommentView(LoginRequiredMixin, views.CreateView):
