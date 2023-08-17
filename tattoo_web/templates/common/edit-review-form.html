@@ -5,26 +5,27 @@
         <div class="form-container">
             <form action="{% url 'edit review' pk=object.pk %}" method="POST">
                 <h2>Edit Review</h2>
-
-                <div class="form-group">
-                    <label for="{{ form.rating.id_for_label }}">Rate your overall experience:</label>
-                    <i class="fas fa-star"></i>{{ form.rating }}<i class="fas fa-star"></i>
-                    {% for error in form.rating.errors %}
-                        <p class="text-danger">{{ error }}</p>
-                    {% endfor %}
-                </div>
-                <div class="form-group">
-                    <label for="{{ form.review.id_for_label }}">Review: </label>
-                    {{ form.review|placeholder:'Add your Review' }}
-                    {% for error in form.review.errors %}
-                        <p class="text-danger">{{ error }}</p>
-                    {% endfor %}
-                </div>
-
-                {% csrf_token %}
-
-                <button type="submit">Save Changes</button>
-                <a href="{% url 'reviews' %}">Go Back</a>
+                {% if user.is_authenticated and user.pk == object.user.pk or user.is_superuser %}
+                    <div class="form-group">
+                        <label for="{{ form.rating.id_for_label }}">Rate your overall experience:</label>
+                        <i class="fas fa-star"></i>{{ form.rating }}<i class="fas fa-star"></i>
+                        {% for error in form.rating.errors %}
+                            <p class="text-danger">{{ error }}</p>
+                        {% endfor %}
+                    </div>
+                    <div class="form-group">
+                        <label for="{{ form.review.id_for_label }}">Review: </label>
+                        {{ form.review|placeholder:'Add your Review' }}
+                        {% for error in form.review.errors %}
+                            <p class="text-danger">{{ error }}</p>
+                        {% endfor %}
+                    </div>
+                    {% csrf_token %}
+                    <button type="submit">Save Changes</button>
+                    <a href="{% url 'reviews' %}">Go Back</a>
+                {% else %}
+                    <p>You can't edit someone else's review</p>
+                {% endif %}
             </form>
         </div>
     </section>

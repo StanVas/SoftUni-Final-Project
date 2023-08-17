@@ -43,10 +43,13 @@
 }
 
 .review-rating {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     color: darkorange;
     font-size: 26px;
     font-weight: 700;
-    justify-content: space-between;
+    /*justify-content: space-between;*/
 }
 
 .review-text {
@@ -79,4 +82,10 @@
 
 .reviews-container .special-btn {
     justify-content: space-around;
+}
+
+.review-section .color {
+    font-size: 26px;
+    font-weight: 700;
+    color: darkorange;
 }

@@ -1,5 +1,7 @@
+from django.contrib.auth import get_user_model
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.shortcuts import render
+from django.db.models import Avg
+from django.shortcuts import render, get_object_or_404
 from django.urls import reverse, reverse_lazy
 from django.views import generic as views
 
@@ -8,7 +10,8 @@ from tattoo_web.common.forms import ArtistPhotoCommentForm, UserPhotoCommentForm
 from tattoo_web.common.models import ArtistPhotoComment, UserPhotoComment, UserReview
 from tattoo_web.photos.models import UserPhoto, ArtistPhoto
 
-from django.db.models import Avg
+
+UserModel = get_user_model()
 
 
 class HomeView(views.TemplateView):
@@ -181,3 +184,33 @@ class UserCommentDeleteView(LoginRequiredMixin, views.DeleteView):
 
     def get_success_url(self):
         return reverse('details user photo', kwargs={'pk': self.object.photo.pk})
+
+
+class ProfileReviewsView(views.ListView):
+    model = UserReview
+    template_name = 'common/user-profile-reviews.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        user = get_object_or_404(UserModel, pk=self.kwargs['pk'])
+
+        user_profile = UserModel.objects.get(pk=user.pk)
+
+        context['user_reviews'] = UserReview.objects.filter(user=user).order_by('-id')
+        context['user_profile'] = user_profile
+        return context
+
+
+class ProfileCommentsView(views.TemplateView):
+    template_name = 'common/user-profile-comments.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        user = get_object_or_404(UserModel, pk=self.kwargs['pk'])
+
+        user_profile = UserModel.objects.get(pk=user.pk)
+
+        context['user_comment'] = UserPhotoComment.objects.filter(user=user).order_by('-id')
+        context['art_comment'] = ArtistPhotoComment.objects.filter(user=user).order_by('-id')
+        context['user_profile'] = user_profile
+        return context

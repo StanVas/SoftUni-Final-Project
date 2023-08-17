@@ -1,9 +1,12 @@
+import profile
+
 from django.contrib.auth import views as auth_views, get_user_model, login
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy, reverse
 from django.views import generic as views
 
 from tattoo_web.accounts.forms import RegisterUserForm, EditUserForm
+from tattoo_web.common.models import UserReview, ArtistPhotoComment, UserPhotoComment
 
 UserModel = get_user_model()
 
@@ -29,7 +32,6 @@ class LoginUserView(auth_views.LoginView):
 
     def form_valid(self, form):
         # This method is called when the form is valid.
-        # You can add any custom logic here if needed.
         return super().form_valid(form)
 
 
@@ -46,6 +48,12 @@ class ProfileDetailsView(views.DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['user'] = self.request.user
+
+        user_id = self.kwargs['pk']
+        context['reviews'] = UserReview.objects.filter(user_id=user_id)
+        context['art_comments'] = ArtistPhotoComment.objects.filter(user_id=user_id)
+        context['user_comments'] = UserPhotoComment.objects.filter(user_id=user_id)
+
         return context
 
 

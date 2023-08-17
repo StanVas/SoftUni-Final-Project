@@ -1,0 +1,52 @@
+{% extends 'base/base.html' %}
+{% block page_content %}
+    <section class="review-section">
+        <div>
+            <h1>User: <span class="color">{{ user_profile.username }}</span></h1>
+            <h2>All Reviews:</h2>
+            {% if not user_reviews %}
+                <h3><span class="color">No Reviews Yet</span></h3>
+            {% else %}
+                <div class="reviews-container">
+                    {% for review in user_reviews %}
+                        <div class="review-box">
+                            <div class="profile-pic">
+                                <a href="{% url 'details user' pk=review.user.pk %}">
+                                    <img src="{{ review.user.profile_picture.url }}"
+                                         alt="{{ review.user.username }}">
+                                </a>
+                            </div>
+                            <div>
+                                <p class="review-details">
+                                    <a href="{% url 'details user' pk=review.user.pk %}">
+                                        {{ review.user.username }}
+                                    </a>
+                                    {{ review.date_of_publication }}
+                                </p>
+                                <p class="review-rating">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    {{ review.rating }}
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                </p>
+                                <p class="review-text">{{ review.review }}</p>
+                            </div>
+                        </div>
+
+                        {% if user.is_authenticated and user == review.user or user.is_superuser %}
+                            <div class="special-btn">
+                                <a href="{% url 'edit review' pk=review.pk %}"><i
+                                        class="fas fa-edit"></i>Edit</a>
+                                <a href="{% url 'delete review' pk=review.pk %}"><i
+                                        class="fas fa-trash-alt"></i>Delete</a>
+                            </div>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+            {% endif %}
+        </div>
+    </section>
+{% endblock %}

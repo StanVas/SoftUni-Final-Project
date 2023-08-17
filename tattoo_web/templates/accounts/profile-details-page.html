@@ -30,6 +30,20 @@
                 <p class="full-name">Name: <span class="color">{{ profile.full_name }}</span></p>
             {% endif %}
 
+            {#            {% if reviews %}#}
+            <div>
+                <a class="extra-links" href="{% url 'reviews user' pk=profile.pk %}">
+                    <i class="fas fa-star"></i>Reviews<i class="fas fa-star"></i>
+                </a>
+            </div>
+            {#            {% endif %}#}
+            {#            {% if art_comments or user_comments %}#}
+            <div>
+                <a class="extra-links" href="{% url 'comments user' pk=profile.pk %}">
+                    <i class="fas fa-comments"></i>Comments<i class="fas fa-comments"></i>
+                </a>
+            </div>
+            {#            {% endif %}#}
         </div>
 
         <div class="profile-gallery">
@@ -45,7 +59,7 @@
             {% if not profile.userphoto_set.all %}
                 <h1>No Photos</h1>
             {% else %}
-                <p><span class="color">{{ user.username }}'s</span> Photos</p>
+                <p><span class="color">{{ profile.username }}'s</span> Photos</p>
                 <ul class="user-photos">
                     {% for photo in profile.userphoto_set.all %}
                         <li class="user-photo">

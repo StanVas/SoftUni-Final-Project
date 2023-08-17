@@ -1,0 +1,74 @@
+{% extends 'base/base.html' %}
+{% block page_content %}
+    <section class="comment-section">
+        <div>
+
+            <h1 class="comment-header">User: <span class="color">{{ user_profile.username }}</span></h1>
+            <h2 class="comment-header">All Comments:</h2>
+
+            {% if not user_comment and not art_comment %}
+                <h3><span class="color">No Comments Yet</span></h3>
+            {% else %}
+                <div class="comment-container">
+                    {% for comment in art_comment %}
+                        <div class="comment">
+                            <a class="photo-box" href="{% url 'details photo' pk=comment.photo.pk %}">
+                                <img src="{{ comment.photo.photo.url }}" alt="{{ art_comment.user_photo }}">
+                            </a>
+
+                            <div>
+                                <a href="{% url 'details user' pk=comment.user.pk %}">
+                                    <span class="color">{{ comment.user }}</span>
+                                </a>
+                                <span>
+                                    {{ comment.date_time_of_publication }}
+                                </span>
+                            </div>
+                            <p>{{ comment.text }}</p>
+                        </div>
+                        {% if user.is_authenticated and user == comment.user or user.is_superuser %}
+                            <div class="special-btn">
+                                <a href="{% url 'edit comment art' pk=comment.pk %}">
+                                    <i class="fas fa-edit"></i>Edit
+                                </a>
+                                <a href="{% url 'delete comment art' pk=comment.pk %}">
+                                    <i class="fas fa-trash-alt"></i>Delete
+                                </a>
+                            </div>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+
+                <div class="comment-container">
+                    {% for comment in user_comment %}
+                        <div class="comment">
+                            <a class="photo-box" href="{% url 'details photo' pk=comment.photo.pk %}">
+                                <img src="{{ comment.photo.photo.url }}" alt="{{ art_comment.user_photo }}">
+                            </a>
+
+                            <div>
+                                <a href="{% url 'details user' pk=comment.user.pk %}">
+                                    <span class="color">{{ comment.user }}</span>
+                                </a>
+                                <span>
+                                    {{ comment.date_time_of_publication }}
+                                </span>
+                            </div>
+                            <p>{{ comment.text }}</p>
+                        </div>
+                        {% if user.is_authenticated and user == comment.user or user.is_superuser %}
+                            <div class="special-btn">
+                                <a href="{% url 'edit comment user' pk=comment.pk %}">
+                                    <i class="fas fa-edit"></i>Edit
+                                </a>
+                                <a href="{% url 'delete comment user' pk=comment.pk %}">
+                                    <i class="fas fa-trash-alt"></i>Delete
+                                </a>
+                            </div>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+            {% endif %}
+        </div>
+    </section>
+{% endblock %}
