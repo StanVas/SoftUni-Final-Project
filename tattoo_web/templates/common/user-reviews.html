@@ -13,6 +13,7 @@
                 </ul>
             {% endif %}
 
+            {% if total_reviews %}
             <div class="review-summary">
                 <div class="total-reviews">
                     Total Reviews: {{ total_reviews }}
@@ -21,6 +22,7 @@
                     Average Rating: {{ average_rating|floatformat:1 }}
                 </div>
             </div>
+            {% endif %}
 
             {% if not reviews %}
                 <h3>No Reviews Yet</h3>

@@ -1,3 +1,6 @@
+import asyncio
+
+from asgiref.sync import async_to_sync
 from django.contrib.auth import get_user_model
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db.models import Avg
@@ -9,7 +12,6 @@ from tattoo_web.articles.models import Article
 from tattoo_web.common.forms import ArtistPhotoCommentForm, UserPhotoCommentForm, UserReviewForm
 from tattoo_web.common.models import ArtistPhotoComment, UserPhotoComment, UserReview
 from tattoo_web.photos.models import UserPhoto, ArtistPhoto
-
 
 UserModel = get_user_model()
 
@@ -40,12 +42,51 @@ class UserReviewsView(views.TemplateView):
     model = UserReview
     template_name = 'common/user-reviews.html'
 
+    # def get_context_data(self, **kwargs):
+    #     context = super().get_context_data(**kwargs)
+    #     context['reviews'] = UserReview.objects.all()
+    #     context['average_rating'] = UserReview.objects.aggregate(Avg('rating'))['rating__avg']
+    #     context['total_reviews'] = UserReview.objects.count()
+    #     return context
+
+    @async_to_sync
+    async def dispatch(self, request, *args, **kwargs):
+        all_reviews = UserReview.objects.all()
+        total_reviews = await self.get_total_reviews()
+        average_rating = await self.get_average_rating()
+
+        self.async_context_data = {
+            'total_reviews': total_reviews,
+            'reviews': all_reviews,
+            'average_rating': average_rating,
+        }
+
+        return super().dispatch(request, *args, **kwargs)
+
+    async def get_total_reviews(self):
+        loop = asyncio.get_event_loop()
+        total_reviews = await loop.run_in_executor(None, self.calculate_total_reviews)
+        return total_reviews
+
+    def calculate_total_reviews(self):
+        total_reviews = UserReview.objects.count()
+        return total_reviews
+
+    async def get_average_rating(self):
+        loop = asyncio.get_event_loop()
+        average_rating = await loop.run_in_executor(None, self.calculate_average_rating)
+        return average_rating
+
+    def calculate_average_rating(self):
+        average_rating = UserReview.objects.aggregate(Avg('rating'))['rating__avg']
+        return average_rating
+
     def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['reviews'] = UserReview.objects.all()
-        context['average_rating'] = UserReview.objects.aggregate(Avg('rating'))['rating__avg']
-        context['total_reviews'] = UserReview.objects.count()
-        return context
+        return {
+            'total_reviews': self.async_context_data['total_reviews'],
+            'reviews': self.async_context_data['reviews'],
+            'average_rating': self.async_context_data['average_rating']
+        }
 
 
 class CreateReviewView(LoginRequiredMixin, views.CreateView):
