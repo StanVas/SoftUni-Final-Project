@@ -8,9 +8,7 @@
                 <div class="form-group">
                     <label for="{{ form.username.id_for_label }}">Username:</label>
                     {{ form.username|placeholder:'Enter your username' }}
-{#                    {% for error in form.username.errors %}#}
-{#                        <p class="text-danger">{{ error }}</p>#}
-{#                    {% endfor %}#}
+                    {# Only in this form we use form.non_field_errors because it is using LoginView #}
                     {% for error in form.non_field_errors %}
                         <p class="text-danger">{{ error }}</p>
                     {% endfor %}
@@ -18,9 +16,6 @@
                 <div class="form-group">
                     <label for="{{ form.password.id_for_label }}">Password:</label>
                     {{ form.password|placeholder:'Enter your password' }}
-{#                    {% for error in form.password.errors %}#}
-{#                        <p class="text-danger">{{ error }}</p>#}
-{#                    {% endfor %}#}
                     {% for error in form.non_field_errors %}
                         <p class="text-danger">{{ error }}</p>
                     {% endfor %}
@@ -29,6 +24,7 @@
                 <input type="hidden" value="{{ next }}" name="next">
 
                 {% csrf_token %}
+
                 <button type="submit">Log in</button>
             </form>
             <div>

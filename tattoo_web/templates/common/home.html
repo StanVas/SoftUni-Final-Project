@@ -3,7 +3,6 @@
 {% block page_content %}
     <section class="home-container">
         <img class="logo-img" width="700px" src="{% static 'img/image333.png' %}" alt="">
-
         <h2>Recent Articles:</h2>
         <ul class="articles">
             {% for article in latest_articles %}
@@ -18,7 +17,6 @@
                 </li>
             {% endfor %}
         </ul>
-
         <h2>Recent Photos:</h2>
         <ul class="art-photos">
             {% for image in latest_images %}

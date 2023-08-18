@@ -10,7 +10,6 @@
                 <p class="delete-msg">
                     Are you sure you want to delete your profile?
                 </p>
-
                 <form action="{% url 'delete user' pk=object.pk %}" method="post">
 
                     {% csrf_token %}
@@ -18,9 +17,7 @@
                     <button type="submit">Delete Profile</button>
 
                     <a href="{% url 'details user' pk=object.pk %}">Go Back</a>
-
                 </form>
-
             {% else %}
                 <p>You can't delete someone else's profile</p>
             {% endif %}

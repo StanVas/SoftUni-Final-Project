@@ -36,6 +36,7 @@
                     </div>
 
                     {% csrf_token %}
+
                     <button type="submit">Save Changes</button>
                     <div>
                         <a href="{% url 'details user' pk=object.pk %}">Go Back</a>

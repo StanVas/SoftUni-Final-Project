@@ -13,7 +13,9 @@
                         <br>
                         Review: "{{ object.review }}"
                     </p>
+
                     {% csrf_token %}
+
                     <button type="submit">Delete</button>
                     <a href="{% url 'reviews' %}">Go Back</a>
                 {% else %}

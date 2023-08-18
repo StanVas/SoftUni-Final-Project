@@ -20,7 +20,9 @@
                             <p class="text-danger">{{ error }}</p>
                         {% endfor %}
                     </div>
+
                     {% csrf_token %}
+
                     <button type="submit">Save Changes</button>
                     <a href="{% url 'reviews' %}">Go Back</a>
                 {% else %}

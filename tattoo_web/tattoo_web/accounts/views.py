@@ -1,5 +1,3 @@
-import profile
-
 from django.contrib.auth import views as auth_views, get_user_model, login
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy, reverse
@@ -31,7 +29,6 @@ class LoginUserView(auth_views.LoginView):
     template_name = 'accounts/login-page.html'
 
     def form_valid(self, form):
-        # This method is called when the form is valid.
         return super().form_valid(form)
 
 
