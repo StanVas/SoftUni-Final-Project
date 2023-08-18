@@ -1,0 +1,27 @@
+.page-not-found {
+    display: flex;
+    flex-direction: column;
+    gap: 48px;
+    align-items: center;
+    margin: auto;
+}
+
+.page-not-found h1 {
+    color: #824801;
+
+}
+
+.page-not-found p {
+    color: #824801;
+    font-size: 32px;
+    font-weight: 600;
+}
+
+.page-not-found a {
+    color: darkorange;
+    padding: 12px;
+    font-weight: 700;
+    border: 2px solid #824801;
+    border-radius: 12px;
+    background-color: whitesmoke;
+}

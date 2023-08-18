@@ -3,6 +3,8 @@ from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path, include
 
+from tattoo_web.common.views import custom_404_view
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('tattoo_web.common.urls')),
@@ -13,5 +15,7 @@ urlpatterns = [
 
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+handler404 = custom_404_view
 
 # 9XkxsTh^y5D5!2gPy&Vn

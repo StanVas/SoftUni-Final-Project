@@ -214,3 +214,7 @@ class ProfileCommentsView(views.TemplateView):
         context['art_comment'] = ArtistPhotoComment.objects.filter(user=user).order_by('-id')
         context['user_profile'] = user_profile
         return context
+
+
+def custom_404_view(request, exception):
+    return render(request, '404.html', status=404)
