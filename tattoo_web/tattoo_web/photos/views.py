@@ -1,5 +1,6 @@
 from django.contrib.auth.decorators import user_passes_test
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.core.paginator import Paginator
 from django.urls import reverse_lazy, reverse
 from django.utils.decorators import method_decorator
 from django.views import generic as views
@@ -15,6 +16,11 @@ class PhotosListView(views.ListView):
     model = ArtistPhoto
     template_name = 'photos/photo_gallery.html'
     context_object_name = 'photos'
+
+    paginate_by = 8
+
+    def get_queryset(self):
+        return ArtistPhoto.objects.all()
 
 
 class PhotoDetailsView(views.DetailView):
@@ -59,6 +65,11 @@ class UserPhotosListView(views.ListView):
     model = UserPhoto
     template_name = 'photos/user_photo_gallery.html'
     context_object_name = 'user_photos'
+
+    paginate_by = 8
+
+    def get_queryset(self):
+        return UserPhoto.objects.all()
 
 
 class UserPhotoDetailsView(LoginRequiredMixin, views.DetailView):

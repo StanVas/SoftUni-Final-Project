@@ -18,6 +18,11 @@ class ArticlesListView(views.ListView):
     template_name = 'articles/articles-page.html'
     context_object_name = 'articles'
 
+    paginate_by = 8
+
+    def get_queryset(self):
+        return Article.objects.all()
+
 
 class ArticleDetailsView(views.DetailView):
     model = Article
